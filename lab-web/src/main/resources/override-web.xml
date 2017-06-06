@@ -1,0 +1,3 @@
+<Configure id="server" class="org.eclipse.jetty.server.Server">
+    <Set name="useFileMappedBuffer">false</Set>
+</Configure>

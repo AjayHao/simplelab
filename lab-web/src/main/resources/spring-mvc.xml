@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"
+        default-autowire="byName">
+
+    <!--首先走默认的 web.xml 配置的servlet，没有的话才找对应controller -->
+    <mvc:default-servlet-handler />
+    <!--
+    <mvc:resources mapping="/resources/js/**" location="/scripts/vendor/" />
+    <mvc:resources mapping="/resources/css/**" location="/scripts/vendor/" />
+    <mvc:resources mapping="/resources/styles/**" location="/styles/" />
+    <mvc:resources mapping="/resources/directives/**" location="/scripts/directives/" />
+    <mvc:resources mapping="/resources/controllers/**" location="/scripts/controllers/" />
+    -->
+    <!-- Enables the Spring MVC @Controller programming dao -->
+    <!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的 -->
+    <mvc:annotation-driven />
+
+    <!-- 扫描controller（controller层注入） -->
+    <context:component-scan base-package="com.ajayhao.simplelab.web.toolbox" />
+    <context:component-scan base-package="com.ajayhao.simplelab.web.controller" />
+
+    <!-- velocity模板配置 -->
+    <!--<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/template/" />
+        <property name="configLocation">
+            <value>classpath:velocity.properties</value>
+        </property>
+    </bean>-->
+
+    <!-- vhtml视图  -->
+    <!--<bean id="velocityResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="prefix" value="/vhtml/"/>
+        <property name="suffix" value=".vhtml"/>
+        <property name="order" value="1" />
+    </bean>-->
+
+    <!-- 引入配置文件 -->
+    <bean id="filePropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:file.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 普通html视图  -->
+    <bean id="htmlResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/" />
+        <property name="suffix" value=".html" />
+        <property name="order" value="99"/>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="${file.upload.encoding}"></property>
+        <property name="maxUploadSize" value="${file.upload.maxSize}"></property>
+        <property name="maxInMemorySize" value="${file.upload.maxSizeInMemory}"></property>
+    </bean>
+
+
+    <!-- 首页 地址映射 -->
+    <mvc:view-controller path="/" view-name="index"/>
+
+</beans>
