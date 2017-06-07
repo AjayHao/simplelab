@@ -30,44 +30,63 @@
     <context:component-scan base-package="com.ajayhao.simplelab.web.controller" />
 
     <!-- velocity模板配置 -->
-    <!--<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="/WEB-INF/template/" />
-        <property name="configLocation">
-            <value>classpath:velocity.properties</value>
+    <bean id="velocityConfig"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath"><!-- 页面文件的路径,相对于webapp -->
+            <value>vm</value>
         </property>
-    </bean>-->
-
-    <!-- vhtml视图  -->
-    <!--<bean id="velocityResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
-        <property name="prefix" value="/vhtml/"/>
-        <property name="suffix" value=".vhtml"/>
-        <property name="order" value="1" />
-    </bean>-->
+        <property name="configLocation" value="/WEB-INF/velocity.properties" />
+        <property name="velocityProperties">
+            <props>
+                <prop key="velocimacro.library">macros-default.vm</prop><!-- Velocimacro 模板库的列表 -->
+                <!--<prop key="eventhandler.noescape.html.match">/(?:screen_content)|(?:noescape_.*)/</prop>-->
+            </props>
+        </property>
+    </bean>
 
     <!-- 引入配置文件 -->
     <bean id="filePropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath*:file.properties</value>
+                <value>WEB-INF/file.properties</value>
             </list>
         </property>
     </bean>
 
-    <!-- 普通html视图  -->
-    <bean id="htmlResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/" />
-        <property name="suffix" value=".html" />
-        <property name="order" value="99"/>
+
+    <!-- view视图  -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <!-- <property name="prefix" value="/velocity/" /> -->
+        <property name="suffix" value=".vm" />
+        <property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml" />
+        <property name="layoutUrl" value="layout/frame/mainframe.vm" />
+        <property name="layoutKey" value="layout" />
+        <property name="screenContentKey" value="screen_content" />
+        <property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持 -->
+        <property name="exposeRequestAttributes" value="true" /><!--是否开放request属性 -->
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="requestContextAttribute" value="rc" /><!--request属性引用名称 -->
+        <!--<property name="order" value="1"/>-->
     </bean>
 
+    <!-- 文件处理视图  -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="${file.upload.encoding}"></property>
         <property name="maxUploadSize" value="${file.upload.maxSize}"></property>
         <property name="maxInMemorySize" value="${file.upload.maxSizeInMemory}"></property>
     </bean>
 
+    <!-- 普通html视图  -->
+    <bean id="htmlResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/" />
+        <property name="suffix" value=".html" />
+        <!--<property name="order" value="99"/>-->
+    </bean>
+
 
     <!-- 首页 地址映射 -->
-    <mvc:view-controller path="/" view-name="index"/>
+    <!--<mvc:view-controller path="/" view-name="index"/>-->
 
 </beans>

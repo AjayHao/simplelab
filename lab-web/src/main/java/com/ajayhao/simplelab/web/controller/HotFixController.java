@@ -28,7 +28,7 @@ public class HotFixController {
     @Autowired
     private AllRounderTool allRounderTool;
 
-    @RequestMapping("repair.form")
+    @RequestMapping("repair.htm")
     @ResponseBody
     public String prepare(@RequestParam("beanId")String beanId
             , @RequestParam("methodName")String methodName

@@ -1,0 +1,47 @@
+#macro ( addUniqFormId $f)
+	<input type="hidden" name="$!f.getFormUniqIdFieldName()" value="$!f.getToken()"/>
+#end
+
+#macro ( addFormToken $f)
+	<input type="hidden" name="$!f.getTokenFieldName()" value="$!f.getToken()"/>
+#end
+
+#macro ( addHiddenField $name $value)
+    <input id="$name" type="hidden" name="$name" value="$value"/>
+#end
+
+
+##允许表单重复提交
+#macro ( allowFormDupSubmit $f)
+	<input type="hidden" name="$!f.getForbidDupSubmitName()" value="n"/>
+#end
+
+##show error messages of properties in the form
+#macro ( showErrorMsgsBR $path $classOrStyle)
+	#if("$!springHtmlEscape" != "")
+        #set( $status = $springMacroRequestContext.getBindStatus($path, $springHtmlEscape) )
+    #else
+        #set( $status = $springMacroRequestContext.getBindStatus($path) )
+    #end
+    #foreach($error in $status.errorMessages)
+        #if($classOrStyle == "")
+            <b>${error}</b>
+        #else
+            #if($classOrStyle.indexOf(":") == -1)
+                #set($attr="class")
+            #else
+                #set($attr="style")
+            #end
+           <span ${attr}="${classOrStyle}">${error}</span>
+        #end
+        <br/>
+    #end
+#end
+
+##show error messages of properties in the form
+#macro ( showFieldErrorMsg $path)
+    #set( $status = $springMacroRequestContext.getBindStatus($path) )
+    #foreach($error in $status.errorMessages)
+        <font color="#FF0000">${error}</font>
+    #end
+#end
