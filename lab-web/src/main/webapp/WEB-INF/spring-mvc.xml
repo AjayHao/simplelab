@@ -61,7 +61,7 @@
         <!-- <property name="prefix" value="/velocity/" /> -->
         <property name="suffix" value=".vm" />
         <property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml" />
-        <property name="layoutUrl" value="layout/frame/mainframe.vm" />
+        <property name="layoutUrl" value="layout/default/mainframe.vm" />
         <property name="layoutKey" value="layout" />
         <property name="screenContentKey" value="screen_content" />
         <property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持 -->

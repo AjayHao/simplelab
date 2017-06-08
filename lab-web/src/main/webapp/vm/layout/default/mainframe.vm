@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Simple Lab</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="${rc.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +33,9 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- custom styles begin -->
+    #parse($custom_style)
+    <!-- custom styles end -->
 </head>
 
 <body>
@@ -42,8 +45,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
-        #parse("/layout/frame/header.vm")
-        #parse("/layout/frame/menu.vm")
+        #parse("/layout/default/header.vm")
+        #parse("/layout/default/menu.vm")
 
     </nav>
 
@@ -72,6 +75,9 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="${rc.contextPath}/dist/js/sb-admin-2.js"></script>
+<!-- custom scripts begin -->
+    #parse($custom_script)
+<!-- custom scripts end -->
 
 </body>
 

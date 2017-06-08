@@ -30,7 +30,7 @@ public class HotFixController {
 
     @RequestMapping("repair.htm")
     @ResponseBody
-    public String prepare(@RequestParam("beanId")String beanId
+    public Map<String,Object> execute(@RequestParam("beanId")String beanId
             , @RequestParam("methodName")String methodName
             , @RequestParam("paramTypeStr")String paramTypeStr
             , @RequestParam("paramJsonStr")String paramJsonStr) {
@@ -64,6 +64,7 @@ public class HotFixController {
         }
 
         resultMap.put("请求返回",response);
-        return CoreObjectUtils.object2Json(resultMap);
+        //return CoreObjectUtils.object2Json(resultMap);
+        return resultMap;
     }
 }
