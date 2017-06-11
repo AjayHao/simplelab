@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Ajay.Hao on 2017/6/7.
  */
 @Controller
-@RequestMapping("/index.htm")
+@RequestMapping("/index")
 public class IndexController {
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
