@@ -1,5 +1,7 @@
 package com.ajayhao.simplelab.web.controller;
 
+import com.ajayhao.simplelab.web.service.OraService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,13 +14,15 @@ import java.io.UnsupportedEncodingException;
  */
 
 @RestController
-public class ParamTestController {
+public class OraTestController {
+
+    @Autowired
+    private OraService oraService;
+
     @RequestMapping("/mail")
     @ResponseBody
     public String sendSms(@RequestParam String mobileNo, @RequestParam String content) {
-        //中文处理
-        String a = mobileNo;
-
-        return "a:"+a+"b:"+content;
+        oraService.executeOraFunc();
+        return "";
     }
 }

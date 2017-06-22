@@ -41,8 +41,8 @@
     <mvc:annotation-driven />
 
     <!-- 扫描controller（controller层注入） -->
-    <context:component-scan base-package="com.ajayhao.simplelab.web.toolbox" />
-    <context:component-scan base-package="com.ajayhao.simplelab.web.controller" />
+    <context:component-scan base-package="com.ajayhao.simplelab.web" />
+    <!--<context:component-scan base-package="com.ajayhao.simplelab.web.controller" />-->
 
     <!-- velocity模板配置 -->
     <bean id="velocityConfig"
