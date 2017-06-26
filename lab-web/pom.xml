@@ -123,7 +123,6 @@
         <dependency>
             <groupId>ojdbc</groupId>
             <artifactId>ojdbc</artifactId>
-            <version>14</version>
         </dependency>
 
         <dependency>
