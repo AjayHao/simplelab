@@ -26,8 +26,8 @@
     </select>
 
     <insert id="insertTestInfo">
-        insert into test_info value(#{testId},#{testMsg},#{testVal})
-        <!--<trim prefix="(" suffix=")" suffixOverrides="," >
+        insert into test_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="testId != null" >
                 test_id,
             </if>
@@ -48,6 +48,6 @@
             <if test="testVal != null" >
                 #{testVal,jdbcType=INTEGER},
             </if>
-        </trim>-->
+        </trim>
     </insert>
 </mapper>
