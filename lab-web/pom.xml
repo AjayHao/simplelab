@@ -22,31 +22,14 @@
             <groupId>com.ajayhao.simplelab</groupId>
             <artifactId>lab-base</artifactId>
         </dependency>
-        <!--
-                <dependency>
+<!--                <dependency>
                     <groupId>com.ajayhao.simplelab</groupId>
                     <artifactId>lab-facade</artifactId>
-                </dependency>
-
-                <dependency>
-                    <groupId>com.ajayhao.simplelab</groupId>
-                    <artifactId>lab-biz</artifactId>
-                </dependency>
-        -->
+                </dependency>-->
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
+            <groupId>com.ajayhao.simplelab</groupId>
+            <artifactId>lab-service</artifactId>
         </dependency>
 
         <dependency>
@@ -91,11 +74,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-dbcp2</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
@@ -118,11 +96,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
         </dependency>
 
         <dependency>

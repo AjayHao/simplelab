@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ajayhao.simplelab.dal.LabDAO">
+
+    <!-- result maps for database table cif_user_forbidden_status -->
+    <resultMap id="RM-TEST-INFO" type="com.ajayhao.simplelab.dal.entity.TestInfo">
+        <result property="testId" column="test_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="testMsg" column="test_msg" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="testVal" column="test_val" javaType="int" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="queryTestInfo" resultMap="RM-TEST-INFO">
+        SELECT
+            test_id,
+            test_msg,
+            test_val
+        FROM test_info
+        WHERE 1=1
+        <if test="testId != null and testId != ''">
+            <![CDATA[
+              AND test_id = #{testId}
+            ]]>
+        </if>
+    </select>
+
+    <insert id="insertTestInfo">
+        insert into test_info value(#{testId},#{testMsg},#{testVal})
+        <!--<trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="testId != null" >
+                test_id,
+            </if>
+            <if test="testMsg != null" >
+                test_msg,
+            </if>
+            <if test="testVal != null" >
+                test_val,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="testId != null" >
+                #{testId,jdbcType=VARCHAR},
+            </if>
+            <if test="testMsg != null" >
+                #{testMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="testVal != null" >
+                #{testVal,jdbcType=INTEGER},
+            </if>
+        </trim>-->
+    </insert>
+</mapper>

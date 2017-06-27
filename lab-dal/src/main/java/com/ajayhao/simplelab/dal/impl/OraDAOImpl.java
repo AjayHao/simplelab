@@ -1,6 +1,6 @@
-package com.ajayhao.simplelab.web.dao.impl;
+package com.ajayhao.simplelab.dal.impl;
 
-import com.ajayhao.simplelab.web.dao.OraDAO;
+import com.ajayhao.simplelab.dal.OraDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.CallableStatementCallback;

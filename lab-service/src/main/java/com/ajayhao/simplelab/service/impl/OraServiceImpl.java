@@ -1,7 +1,7 @@
-package com.ajayhao.simplelab.web.service.impl;
+package com.ajayhao.simplelab.service.impl;
 
-import com.ajayhao.simplelab.web.dao.OraDAO;
-import com.ajayhao.simplelab.web.service.OraService;
+import com.ajayhao.simplelab.service.OraService;
+import com.ajayhao.simplelab.dal.OraDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class OraServiceImpl implements OraService{
+public class OraServiceImpl implements OraService {
 
     @Autowired
     private OraDAO oraDAO;

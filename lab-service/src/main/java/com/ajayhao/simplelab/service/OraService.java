@@ -1,4 +1,4 @@
-package com.ajayhao.simplelab.web.service;
+package com.ajayhao.simplelab.service;
 
 /**
  * Created by AjayHao on 2017/6/22.

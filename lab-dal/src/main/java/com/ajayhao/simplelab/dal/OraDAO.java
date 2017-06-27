@@ -1,4 +1,4 @@
-package com.ajayhao.simplelab.web.dao;
+package com.ajayhao.simplelab.dal;
 
 /**
  * Created by AjayHao on 2017/6/22.
