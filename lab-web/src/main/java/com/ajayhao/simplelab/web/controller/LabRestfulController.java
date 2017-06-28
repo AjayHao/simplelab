@@ -18,8 +18,15 @@ public class LabRestfulController {
 
     @RequestMapping("/pushMsg")
     @ResponseBody
-    public String sendSms(@RequestParam String topic, @RequestParam String msg) {
-        labService.pushMsg(topic,msg);
+    public String pushMsg(@RequestParam String topic,  @RequestParam String tag, @RequestParam String msg) {
+        labService.pushMsg(topic, tag, msg);
+        return "";
+    }
+
+    @RequestMapping("/receiveMsg")
+    @ResponseBody
+    public String receiveMsg(@RequestParam String topic, @RequestParam String tag) {
+        labService.receiveMsg(topic, tag);
         return "";
     }
 }
