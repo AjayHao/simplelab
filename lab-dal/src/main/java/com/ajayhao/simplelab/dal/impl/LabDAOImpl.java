@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by haozj on 2017/6/29.
  */
-@Repository
+@Repository("labDAO")
 public class LabDAOImpl implements LabDAO{
 
     @Autowired

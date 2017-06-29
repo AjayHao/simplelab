@@ -23,7 +23,7 @@ public class LabServiceImpl implements LabService{
     @Override
     public void pushMsg(String tag, String msg) {
         try {
-            Message message = new Message("PushTopic", "push", "1",  msg.getBytes());
+            Message message = new Message("PushTopic", tag, msg.getBytes());
             SendResult result = mqProducer.send(message);
             System.out.println("id:" + result.getMsgId() + " result:" + result.getSendStatus());
         } catch (Exception e) {

@@ -24,7 +24,7 @@ public class MessageListenerImpl implements MessageListenerConcurrently {
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgList, ConsumeConcurrentlyContext context) {
         for (MessageExt messageExt : msgList) {
             System.out.println("consume message:"+ messageExt.toString());
-            doConsume("PushTopic", messageExt.toString());
+            doConsume(messageExt.getTopic(), new String(messageExt.getBody()));
         }
         System.out.println("getDelayLevelWhenNextConsume="+context.getDelayLevelWhenNextConsume()+"getMessageQueue="+context.getMessageQueue().toString()+"getDelayLevelWhenNextConsume="+context.getDelayLevelWhenNextConsume());
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
@@ -36,7 +36,8 @@ public class MessageListenerImpl implements MessageListenerConcurrently {
         i.setTestId(topic);
         i.setTestMsg(message);
         i.setTestVal(0);
-        labDAO.insertTestInfo(i);
+        int cnt = labDAO.insertTestInfo(i);
+        System.out.println("插入消息:"+ cnt +"条");
     }
 
 }
