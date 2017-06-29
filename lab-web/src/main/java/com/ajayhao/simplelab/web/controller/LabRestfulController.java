@@ -2,6 +2,7 @@ package com.ajayhao.simplelab.web.controller;
 
 import com.ajayhao.simplelab.service.LabService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,15 +19,9 @@ public class LabRestfulController {
 
     @RequestMapping("/pushMsg")
     @ResponseBody
-    public String pushMsg(@RequestParam String topic,  @RequestParam String tag, @RequestParam String msg) {
-        labService.pushMsg(topic, tag, msg);
+    public String pushMsg(@RequestParam String tag, @RequestParam String msg) {
+        labService.pushMsg(tag, msg);
         return "";
     }
 
-    @RequestMapping("/receiveMsg")
-    @ResponseBody
-    public String receiveMsg(@RequestParam String topic, @RequestParam String tag) {
-        labService.receiveMsg(topic, tag);
-        return "";
-    }
 }

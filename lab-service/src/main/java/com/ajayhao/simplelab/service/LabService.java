@@ -5,7 +5,6 @@ package com.ajayhao.simplelab.service;
  */
 public interface LabService {
 
-    void pushMsg(String topic, String tag, String msg);
+    void pushMsg(String tag, String msg);
 
-    void receiveMsg(String topic, String tag);
 }

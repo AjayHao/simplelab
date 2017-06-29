@@ -4,12 +4,14 @@ import com.ajayhao.simplelab.dal.LabDAO;
 import com.ajayhao.simplelab.dal.entity.TestInfo;
 import com.ajayhao.simplelab.dal.mapper.LabMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by haozj on 2017/6/29.
  */
+@Repository
 public class LabDAOImpl implements LabDAO{
 
     @Autowired

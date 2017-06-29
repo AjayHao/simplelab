@@ -61,6 +61,7 @@
 
     <!-- 引入配置文件 -->
     <bean id="filePropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
         <property name="locations">
             <list>
                 <value>WEB-INF/file.properties</value>

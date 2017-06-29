@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd"
+    default-autowire="byName">
+
+    <!-- 引入配置文件 -->
+    <bean id="mqPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath:mq.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="messageListener" class="com.ajayhao.simplelab.service.listener.impl.MessageListenerImpl" />
+
+    <bean id="mqConsumer" class="org.apache.rocketmq.client.consumer.DefaultMQPushConsumer" init-method="start" destroy-method="shutdown">
+        <property name="consumerGroup" value="rocketmqConsumer"/>
+        <property name="namesrvAddr" value="${springlab.rocketmq.url}"/>
+        <property name="messageListener" ref="messageListener"/>
+        <property name="subscription">
+            <map>
+                <entry key="PushTopic">
+                    <value>*</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="mqProducer" class="org.apache.rocketmq.client.producer.DefaultMQProducer" init-method="start" destroy-method="shutdown">
+        <property name="producerGroup" value="rocketmqProducer"/>
+        <property name="namesrvAddr" value="${springlab.rocketmq.url}"/>
+    </bean>
+
+</beans>
