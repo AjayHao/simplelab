@@ -68,8 +68,8 @@
 
     <!-- scan for mappers and let them be autowired -->
     <!--动态代理 不写dao的实现 -->
-    <bean  id="MapperScannerConfigurer"  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.ajayhao.simplelab.dal" />
+    <bean id="MapperScannerConfigurer"  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ajayhao.simplelab.dal.mapper" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

@@ -21,7 +21,7 @@ import java.util.List;
  * Created by AjayHao on 2017/6/27.
  */
 @Service
-public class LabServiceImpl implements LabService {
+public class LabServiceImpl implements LabService{
 
     @Autowired
     private LabDAO labDAO;
