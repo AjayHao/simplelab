@@ -21,7 +21,7 @@ public class LabRestfulController {
     @ResponseBody
     public String pushMsg(@RequestParam String tag, @RequestParam String msg) {
         labService.pushMsg(tag, msg);
-        return "";
+        return "Operation done!";
     }
 
 }

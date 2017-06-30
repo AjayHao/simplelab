@@ -64,7 +64,8 @@
         <property name="ignoreUnresolvablePlaceholders" value="true" />
         <property name="locations">
             <list>
-                <value>WEB-INF/file.properties</value>
+                <value>file:~/config/common.properties</value>
+                <value>file:~/config/db.properties</value>
             </list>
         </property>
     </bean>
