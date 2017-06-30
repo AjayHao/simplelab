@@ -59,19 +59,6 @@
         </property>
     </bean>
 
-    <!-- 引入配置文件 -->
-    <bean class="com.ajayhao.core.spring.config.PropertyPlaceholderConfigurer">
-        <property name="ignoreUnresolvablePlaceholders" value="true" />
-        <property name="ignoreResourceNotFound" value="true"/>
-        <property name="locations">
-            <list>
-                <value>file:~/config/simplelab/db.properties</value>
-                <value>file:~/config/simplelab/common.properties</value>
-            </list>
-        </property>
-    </bean>
-
-
     <!-- view视图  -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
@@ -110,6 +97,15 @@
         <!--<property name="order" value="99"/>-->
     </bean>
 
+    <bean id="mvcPlaceholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>WEB-INF/file.properties</value>
+            </list>
+        </property>
+    </bean>
 
     <!-- 首页 地址映射 -->
     <!--<mvc:view-controller path="/" view-name="index"/>-->

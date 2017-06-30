@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd"
+    default-autowire="byName">
+
+    <!-- 引入配置文件 -->
+    <!--<bean class="com.ajayhao.core.spring.config.PropertyPlaceholderConfigurer">-->
+    <bean id="rootPlaceholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>file:C:/Users/AjayHao/config/simplelab/db.properties</value>
+                <value>file:C:/Users/AjayHao/config/simplelab/common.properties</value>
+                <!--<value>file:~/config/simplelab/common.properties</value>-->
+            </list>
+        </property>
+    </bean>
+
+
+</beans>
