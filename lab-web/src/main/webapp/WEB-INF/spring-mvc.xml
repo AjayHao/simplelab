@@ -60,12 +60,13 @@
     </bean>
 
     <!-- 引入配置文件 -->
-    <bean id="filePropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean class="com.ajayhao.core.spring.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="ignoreResourceNotFound" value="true"/>
         <property name="locations">
             <list>
-                <value>file:~/config/common.properties</value>
-                <value>file:~/config/db.properties</value>
+                <value>file:~/config/simplelab/db.properties</value>
+                <value>file:~/config/simplelab/common.properties</value>
             </list>
         </property>
     </bean>
