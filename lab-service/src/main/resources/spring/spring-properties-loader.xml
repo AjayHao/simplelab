@@ -9,14 +9,13 @@
     default-autowire="byName">
 
     <!-- 引入配置文件 -->
-    <!--<bean class="com.ajayhao.core.spring.config.PropertyPlaceholderConfigurer">-->
     <bean id="rootPlaceholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true" />
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="locations">
             <list>
-                <value>file:C:/Users/AjayHao/config/simplelab/db.properties</value>
-                <value>file:C:/Users/AjayHao/config/simplelab/common.properties</value>
+                <value>file:${user.home}/config/simplelab/db.properties</value>
+                <value>file:${user.home}/config/simplelab/common.properties</value>
                 <!--<value>file:~/config/simplelab/common.properties</value>-->
             </list>
         </property>
