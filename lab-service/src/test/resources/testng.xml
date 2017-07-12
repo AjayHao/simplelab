@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="com.ajayhao.simplelab.test">
+
+    <test name="service">
+        <classes>
+            <class name="com.ajayhao.simplelab.test.service.MessageListenerTest" />
+            <parameter name="topic1" value="aaaaaa" />
+            <parameter name="body1" value="bbbbbb" />
+            <parameter name="topic2" value="cccc" />
+            <parameter name="body2" value="dddd" />
+        </classes>
+    </test>
+
+</suite>

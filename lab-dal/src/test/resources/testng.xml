@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="com.ajayhao.simplelab.test">
+
+    <test name="dal">
+        <classes>
+            <class name="com.ajayhao.simplelab.test.dal.LabDAOTest" />
+            <parameter name="testId" value="100" />
+            <parameter name="testMsg" value="hahaha" />
+            <parameter name="testVal" value="1" />
+        </classes>
+    </test>
+
+</suite>

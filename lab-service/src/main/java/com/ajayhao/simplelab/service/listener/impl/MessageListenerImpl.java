@@ -24,20 +24,25 @@ public class MessageListenerImpl implements MessageListenerConcurrently {
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgList, ConsumeConcurrentlyContext context) {
         for (MessageExt messageExt : msgList) {
             System.out.println("consume message:"+ messageExt.toString());
-            doConsume(messageExt.getTopic(), new String(messageExt.getBody()));
+            int i = doConsume(messageExt.getTopic(), new String(messageExt.getBody()));
+            if(i != 1){
+                System.out.println(messageExt.getTopic()+"处理失败");
+                return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+            }
         }
         System.out.println("getDelayLevelWhenNextConsume="+context.getDelayLevelWhenNextConsume()+"getMessageQueue="+context.getMessageQueue().toString()+"getDelayLevelWhenNextConsume="+context.getDelayLevelWhenNextConsume());
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 
 
-    private void doConsume(String topic, String message){
+    private int doConsume(String topic, String message){
         TestInfo i = new TestInfo();
         i.setTestId(topic);
         i.setTestMsg(message);
         i.setTestVal(0);
         int cnt = labDAO.insertTestInfo(i);
         System.out.println("插入消息:"+ cnt +"条");
+        return cnt;
     }
 
 }

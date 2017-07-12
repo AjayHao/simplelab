@@ -3,16 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd"
-    default-autowire="byName">
+       default-autowire="byName">
 
     <!-- 引入配置文件 -->
-    <bean id="rootPlaceholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean id="dbPlaceholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true" />
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="locations">
             <list>
                 <value>file:${user.home}/config/simplelab/db.properties</value>
-                <value>file:${user.home}/config/simplelab/common.properties</value>
             </list>
         </property>
     </bean>
