@@ -44,14 +44,9 @@ public class MessageListenerTest {
     @Parameters({"topic1","body1"})
     public void shouldReturnSuccessWhenConsumeOneMessage(String topic, String body){
 
-        //mock
-        new Expectations(){
-            {
-                labDAO.insertTestInfo((TestInfo) any);
-                result = 1;
-            }
-        };
+        mockInsertTestInfoSuccess();
 
+        //test logic
         List<MessageExt> msgList = new ArrayList<>();
         MessageExt msg = new MessageExt();
 
@@ -74,13 +69,9 @@ public class MessageListenerTest {
     @Parameters({"topic2","body2"})
     public void shouldReturnReconsumeWhenConsumeOneMessage(String topic, String body){
         //mock
-        new Expectations(){
-            {
-                labDAO.insertTestInfo((TestInfo) any);
-                result = 0;
-            }
-        };
+        mockInsertTestInfoFailure();
 
+        //test logic
         List<MessageExt> msgList = new ArrayList<>();
         MessageExt msg = new MessageExt();
 
@@ -94,5 +85,23 @@ public class MessageListenerTest {
 
         ConsumeConcurrentlyStatus status = messageListener.consumeMessage(msgList,context);
         Assert.assertTrue(status == ConsumeConcurrentlyStatus.RECONSUME_LATER);
+    }
+
+    private void mockInsertTestInfoSuccess() {
+        new Expectations(){
+            {
+                labDAO.insertTestInfo((TestInfo) any);
+                result = 1;
+            }
+        };
+    }
+
+    private void mockInsertTestInfoFailure() {
+        new Expectations(){
+            {
+                labDAO.insertTestInfo((TestInfo) any);
+                result = 0;
+            }
+        };
     }
 }
