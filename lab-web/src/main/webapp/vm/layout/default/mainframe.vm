@@ -1,3 +1,4 @@
+#parse("/marco/import.vm")
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,14 +15,11 @@
     <!-- Bootstrap Core CSS -->
     <link href="${rc.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="${rc.contextPath}/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Metis Menu Plugin JavaScript -->
+    #import_css("/vendor/metisMenu/metisMenu.min.css")
 
     <!-- Custom CSS -->
     <link href="${rc.contextPath}/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="${rc.contextPath}/vendor/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="${rc.contextPath}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -34,7 +32,7 @@
     <![endif]-->
 
     <!-- custom styles begin -->
-    #parse($custom_style)
+    $!custom_style
     <!-- custom styles end -->
 </head>
 
@@ -68,15 +66,14 @@
 <!-- Metis Menu Plugin JavaScript -->
 <script src="${rc.contextPath}/vendor/metisMenu/metisMenu.min.js"></script>
 
-<!-- Morris Charts JavaScript -->
-<script src="${rc.contextPath}/vendor/raphael/raphael.min.js"></script>
-<script src="${rc.contextPath}/vendor/morrisjs/morris.min.js"></script>
-<script src="${rc.contextPath}/data/morris-data.js"></script>
+<!-- Vue JavaScript -->
+<script src="${rc.contextPath}/vendor/vue/vue.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="${rc.contextPath}/dist/js/sb-admin-2.js"></script>
+
 <!-- custom scripts begin -->
-    #parse($custom_script)
+$!custom_script
 <!-- custom scripts end -->
 
 </body>

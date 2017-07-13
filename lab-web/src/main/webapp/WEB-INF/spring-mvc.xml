@@ -47,16 +47,14 @@
     <!-- velocity模板配置 -->
     <bean id="velocityConfig"
           class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath"><!-- 页面文件的路径,相对于webapp -->
-            <value>vm</value>
-        </property>
+        <property name="resourceLoaderPath" value="vm" /><!-- 页面文件的路径,相对于webapp -->
         <property name="configLocation" value="/WEB-INF/velocity.properties" />
-        <property name="velocityProperties">
+        <!--<property name="velocityProperties">
             <props>
-                <prop key="velocimacro.library">macros-default.vm</prop><!-- Velocimacro 模板库的列表 -->
-                <!--<prop key="eventhandler.noescape.html.match">/(?:screen_content)|(?:noescape_.*)/</prop>-->
+                <prop key="velocimacro.library">marco/macros-default.vm</prop>&lt;!&ndash; Velocimacro 模板库的列表 &ndash;&gt;
+                <prop key="eventhandler.noescape.html.match">/(?:screen_content)|(?:noescape_.*)/</prop>
             </props>
-        </property>
+        </property>-->
     </bean>
 
     <!-- view视图  -->
@@ -65,7 +63,7 @@
         <property name="contentType" value="text/html;charset=UTF-8" />
         <!-- <property name="prefix" value="/velocity/" /> -->
         <property name="suffix" value=".vm" />
-        <property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml" />
+        <!--<property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml" />-->
         <property name="layoutUrl" value="layout/default/mainframe.vm" />
         <property name="layoutKey" value="layout" />
         <property name="screenContentKey" value="screen_content" />

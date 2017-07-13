@@ -15,13 +15,16 @@ import java.util.List;
  * Created by Ajay.Hao on 2017/6/7.
  */
 @Controller
-@RequestMapping("/index")
+@RequestMapping("/")
 public class IndexController {
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String doGet(ModelMap modelMap, HttpServletRequest request) throws Exception {
-
+    @RequestMapping(path="index", method = RequestMethod.GET)
+    public String doGet(HttpServletRequest request) throws Exception {
         return "/layout/content";
+    }
+    @RequestMapping(path="investinfo", method = RequestMethod.GET)
+    public String investInfoPage(HttpServletRequest request) throws Exception {
+        return "/invest/invest";
     }
 }

@@ -1,0 +1,8 @@
+#macro( import_css $css)
+    #set($custom_style = "$!custom_style<link href='${rc.contextPath}$css' rel='stylesheet' />")
+#end
+
+
+#macro( import_script $script)
+    #set($custom_script = "$!custom_script<script src='${rc.contextPath}$script'></script>")
+#end

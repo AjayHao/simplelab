@@ -1,3 +1,10 @@
+<!-- Morris Charts JavaScript -->
+#import_css("/vendor/morrisjs/morris.css")
+<!-- Morris Charts JavaScript -->
+#import_script("/vendor/raphael/raphael.min.js")
+#import_script("/vendor/morrisjs/morris.min.js")
+#import_script("/data/morris-data.js")
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Dashboard</h1>
