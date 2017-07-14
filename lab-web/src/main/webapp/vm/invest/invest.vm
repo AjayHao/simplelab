@@ -1,8 +1,8 @@
 #import_css("/vendor/datatables/css/dataTables.bootstrap.css")
-#import_css("/vendor/datatables-plugins/dataTables.bootstrap.css")
 #import_css("/vendor/datatables-responsive/dataTables.responsive.css")
+#import_css("/dist/css/site.css")
 #import_script("/vendor/datatables/js/jquery.dataTables.js")
-#import_script("/vendor/datatables-plugins/dataTables.bootstrap.min.js")
+#import_script("/vendor/datatables/js/dataTables.bootstrap.min.js")
 #import_script("/vendor/datatables-responsive/dataTables.responsive.js")
 #import_script("/dist/js/invest/invest.js")
 <div id="app">
@@ -31,6 +31,7 @@
                                 <th>到期日</th>
                                 <th>投资金额</th>
                                 <th>投资收益</th>
+                                <th>年化收益率</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -38,6 +39,7 @@
                                 <th colspan="5">合计</th>
                                 <th></th>
                                 <th></th>
+                                <th> - </th>
                             </tr>
                         </tfoot>
                     </table>

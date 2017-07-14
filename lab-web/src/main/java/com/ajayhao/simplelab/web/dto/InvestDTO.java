@@ -19,6 +19,7 @@ public class InvestDTO implements Serializable{
     private BigDecimal income;
     private String beginDate;
     private String endDate;
+    private BigDecimal annualYield;
 
     public String getId() {
         return id;
@@ -90,5 +91,13 @@ public class InvestDTO implements Serializable{
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public BigDecimal getAnnualYield() {
+        return annualYield;
+    }
+
+    public void setAnnualYield(BigDecimal annualYield) {
+        this.annualYield = annualYield;
     }
 }

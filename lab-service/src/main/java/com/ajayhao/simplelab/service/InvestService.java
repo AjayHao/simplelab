@@ -2,6 +2,7 @@ package com.ajayhao.simplelab.service;
 
 import com.ajayhao.simplelab.dal.entity.InvestInfo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -14,4 +15,6 @@ public interface InvestService {
     List<InvestInfo> queryInvestInfoList();
 
     InvestInfo queryInvestInfo(String id);
+
+    BigDecimal calculateAnnualYield(InvestInfo investInfo);
 }
