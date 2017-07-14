@@ -58,6 +58,9 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
+<script>
+    var basePath = "${rc.contextPath}";
+</script>
 <script src="${rc.contextPath}/vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
@@ -70,7 +73,7 @@
 <script src="${rc.contextPath}/vendor/vue/vue.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="${rc.contextPath}/dist/js/sb-admin-2.js"></script>
+<script src="${rc.contextPath}/dist/js/site.js"></script>
 
 <!-- custom scripts begin -->
 $!custom_script

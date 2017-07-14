@@ -27,7 +27,7 @@ public class LabDAOTest extends DALTest {
     }
 
     @Test
-    @Rollback(false)
+    //@Rollback(false)
     @Parameters({"testId","testMsg","testVal"})
     public void testInsertTestInfo(@Optional("111") String testId, String testMsg, int testVal){
         TestInfo t = new TestInfo();

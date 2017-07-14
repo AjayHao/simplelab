@@ -2482,8 +2482,11 @@
 			row:      rowIdx,
 			col:      colIdx
 		} );
-	
+
 		if ( cellData === undefined ) {
+			cellData = "";
+		}
+		/*if ( cellData === undefined ) {
 			if ( settings.iDrawError != draw && defaultContent === null ) {
 				_fnLog( settings, 0, "Requested unknown parameter "+
 					(typeof col.mData=='function' ? '{function}' : "'"+col.mData+"'")+
@@ -2491,8 +2494,8 @@
 				settings.iDrawError = draw;
 			}
 			return defaultContent;
-		}
-	
+		}*/
+
 		// When the data source is null and a specific data type is requested (i.e.
 		// not the original data), we can use default column data
 		if ( (cellData === rowData || cellData === null) && defaultContent !== null && type !== undefined ) {

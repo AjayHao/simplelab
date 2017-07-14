@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ajayhao.simplelab.dal.mapper.InvestMapper">
+
+    <resultMap id="RM-INVEST-INFO" type="com.ajayhao.simplelab.dal.entity.InvestInfo">
+        <result property="id" column="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="projectName" column="project_name" javaType="string" jdbcType="VARCHAR"/>
+        <result property="projectType" column="project_type" javaType="string" jdbcType="VARCHAR"/>
+        <result property="mainChannel" column="main_channel" javaType="string" jdbcType="VARCHAR"/>
+        <result property="subChannel" column="sub_channel" javaType="string" jdbcType="VARCHAR"/>
+        <result property="cost" column="cost" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+        <result property="income" column="income" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+        <result property="beginDate" column="begin_date" javaType="string" jdbcType="VARCHAR"/>
+        <result property="endDate" column="end_date" javaType="string" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryInvestInfoList" resultMap="RM-INVEST-INFO">
+        SELECT
+            id ,
+            project_name,
+            project_type,
+            main_channel,
+            sub_channel,
+            cost,
+            income,
+            begin_date,
+            end_date
+        FROM invest_info
+        WHERE 1=1
+        <if test="id != null and id != ''">
+            <![CDATA[
+              AND id = #{id}
+            ]]>
+        </if>
+    </select>
+
+    <select id="queryInvestInfo" resultMap="RM-INVEST-INFO">
+        SELECT
+        id ,
+        project_name,
+        project_type,
+        main_channel,
+        sub_channel,
+        cost,
+        income,
+        begin_date,
+        end_date
+        FROM invest_info
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertInvestInfo">
+        insert into invest_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+                id,
+            <if test="projectName != null" >
+                project_name,
+            </if>
+            <if test="projectType != null" >
+                project_type,
+            </if>
+            <if test="mainChannel != null" >
+                main_channel,
+            </if>
+            <if test="subChannel != null" >
+                sub_channel,
+            </if>
+            <if test="cost != null" >
+                cost,
+            </if>
+            <if test="income != null" >
+                income,
+            </if>
+            <if test="beginDate != null" >
+                begin_date,
+            </if>
+            <if test="endDate != null" >
+                end_date,
+            </if>
+            tm
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+                #{id,jdbcType=VARCHAR},
+            <if test="projectName != null" >
+                #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectType != null" >
+                #{projectType,jdbcType=VARCHAR},
+            </if>
+            <if test="mainChannel != null" >
+                #{mainChannel,jdbcType=VARCHAR},
+            </if>
+            <if test="subChannel != null" >
+                #{subChannel,jdbcType=VARCHAR},
+            </if>
+            <if test="cost != null" >
+                #{cost,jdbcType=DECIMAL},
+            </if>
+            <if test="income != null" >
+                #{income,jdbcType=DECIMAL},
+            </if>
+            <if test="beginDate != null" >
+                #{beginDate,jdbcType=VARCHAR},
+            </if>
+            <if test="endDate != null" >
+                #{endDate,jdbcType=VARCHAR},
+            </if>
+            now()
+        </trim>
+    </insert>
+</mapper>

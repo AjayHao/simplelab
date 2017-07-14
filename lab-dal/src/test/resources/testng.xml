@@ -2,12 +2,28 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="com.ajayhao.simplelab.test">
 
-    <test name="dal">
+    <!--<test name="lab_dal">
         <classes>
             <class name="com.ajayhao.simplelab.test.dal.LabDAOTest" />
             <parameter name="testId" value="100" />
             <parameter name="testMsg" value="hahaha" />
             <parameter name="testVal" value="1" />
+        </classes>
+    </test>-->
+
+    <test name="invest_dal" preserve-order="true">
+        <classes>
+            <class name="com.ajayhao.simplelab.test.dal.InvestDAOTest" />
+            <parameter name="id" value="aaa" />
+
+            <parameter name="id1" value="bbb" />
+            <parameter name="project1" value="asfddsaf" />
+            <parameter name="mainchannel1" value="001" />
+            <parameter name="subchannel1" value="002" />
+            <parameter name="cost1" value="1111.11" />
+            <parameter name="income1" value="222.2" />
+            <parameter name="begindate1" value="20160101" />
+            <parameter name="enddate1" value="20160303" />
         </classes>
     </test>
 
