@@ -54,14 +54,3 @@ function toNumber(i) {
             i : 0;
 };
 
-function arrSumUp(arr) {
-    if(typeof arr != 'array'){
-        var errMsg = "接受参数非array类型：" + ( arr);
-        console.error(errMsg);
-        throw new Error(errMsg);
-    }
-    if(!arr || arr.length == 0) return;
-    arr.reduce( function (a, b) {
-        return toNumber(a) + toNumber(b);
-    }, 0 );
-}

@@ -1,3 +1,28 @@
+$.extend( true, $.fn.dataTable.defaults, {
+    //"searching": false,
+    //"ordering": false,
+    //"paging": false,
+    "language": {
+        //"lengthChange": true,//是否允许用户改变表格每页显示的记录数
+        // "scrollX": "100%",//表格的宽度
+        // "scrollY": "200px",//表格的高度
+        "search": "查找",
+        "infoEmpty": "没有数据",
+        "zeroRecords": "没有查找到满足条件的数据",
+        "info": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+        "lengthMenu": "每页显示 _MENU_ 条记录",
+        "infoFiltered": "(从 _MAX_ 条数据中检索)",
+        "paginate": {
+            "first": "首页",
+            "previous": "前一页",
+            "next": "后一页",
+            "last": "尾页"
+        },
+        "decimal": ".",
+        "thousands": ","
+    }
+} );
+
 
 var vueObj = new Vue({
     el: '#app',
@@ -14,9 +39,6 @@ var vueObj = new Vue({
         initRecordTable: function(){
             var self = this;
             this.dataTable = $('#dataTable').DataTable({
-                //"lengthChange": true,//是否允许用户改变表格每页显示的记录数
-                // "scrollX": "100%",//表格的宽度
-                // "scrollY": "200px",//表格的高度
                 "ajax": {
                     "url": basePath+"/invest/list",
                     "dataSrc": "investDTOs"
@@ -27,8 +49,20 @@ var vueObj = new Vue({
                     { "data": "mainChannel" },
                     { "data": "beginDate" },
                     { "data": "endDate" },
-                    { "data": "cost" },
-                    { "data": "income" }
+                    { "data": "cost" ,
+                        "className" : "text-right",
+                        "render" : $.fn.dataTable.render.number( ',', '.', 2, '￥' )
+                    },
+                    { "data": "income", "className" : "text-right"}
+                ],
+                "columnDefs": [
+                    {
+                        "render": function ( data, type, row ) {
+                            return data +' ('+ row['mainChannel']+')';
+                        },
+                        "targets": 0
+                    },
+                    { "visible": false,  "targets": [2] }
                 ],
                 "footerCallback": function ( row, data, start, end, display ) {
                     var api = this.api();
@@ -48,26 +82,13 @@ var vueObj = new Vue({
 
                     // Update footer
                     $(api.column(5).footer() ).html(
-                        pageTotalCost +' 总共('+ totalCost +')'
+                        $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display(pageTotalCost) +
+                            ' 总共('+ $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display( totalCost) +')'
                     );
 
                     $(api.column(6).footer() ).html(
                         pageTotalIncome +' 总共('+ totalIncome +')'
                     );
-                },
-                "language": {
-                    "search": "查找",
-                    "infoEmpty": "没有数据",
-                    "zeroRecords": "没有查找到满足条件的数据",
-                    "info": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
-                    "lengthMenu": "每页显示 _MENU_ 条记录",
-                    "infoFiltered": "(从 _MAX_ 条数据中检索)",
-                    "paginate": {
-                        "first": "首页",
-                        "previous": "前一页",
-                        "next": "后一页",
-                        "last": "尾页"
-                    }
                 },
             });
         }

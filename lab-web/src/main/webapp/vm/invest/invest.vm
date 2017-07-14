@@ -1,3 +1,4 @@
+#import_css("/vendor/datatables/css/dataTables.bootstrap.css")
 #import_css("/vendor/datatables-plugins/dataTables.bootstrap.css")
 #import_css("/vendor/datatables-responsive/dataTables.responsive.css")
 #import_script("/vendor/datatables/js/jquery.dataTables.js")
@@ -34,21 +35,11 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th colspan="5">合计：</th>
+                                <th colspan="5">合计</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </tfoot>
-                        #*<tbody>
-                            <tr v-for="data in investList">
-                                <td>{{data.projectName}}</td>
-                                <td>{{data.projectType}}</td>
-                                <td>{{data.beginDate}}</td>
-                                <td>{{data.cost}}</td>
-                                <td>{{data.endDate}}</td>
-                                <td>{{data.income}}</td>
-                            </tr>
-                        </tbody>*#
                     </table>
                 </div>
                 <!-- /.panel-body -->
