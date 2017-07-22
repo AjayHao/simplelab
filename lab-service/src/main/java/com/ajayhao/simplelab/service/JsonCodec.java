@@ -1,7 +1,5 @@
 package com.ajayhao.simplelab.service;
 
-import static javafx.scene.input.KeyCode.F;
-
 /**
  * Created by AjayHao on 2017/7/13.
  *
