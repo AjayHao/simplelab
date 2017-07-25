@@ -1,12 +1,14 @@
 package com.ajayhao.simplelab.web.dto;
 
+import com.ajayhao.simplelab.base.dto.BaseDTO;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Created by AjayHao on 2017/7/13.
  */
-public class InvestDTO implements Serializable{
+public class InvestDTO extends BaseDTO implements Serializable{
 
     private static final long serialVersionUID = 3095414893084475849L;
 
