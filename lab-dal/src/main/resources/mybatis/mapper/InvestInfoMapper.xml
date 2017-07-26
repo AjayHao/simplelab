@@ -16,17 +16,13 @@
         <result property="endDate" column="end_date" javaType="string" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <sql id="InvestMapper.invest_info_list">
+          id, project_name, project_type, main_channel, sub_channel, cost, income, begin_date, end_date
+    </sql>
+
     <select id="queryInvestInfoList" resultMap="RM-INVEST-INFO">
         SELECT
-            id ,
-            project_name,
-            project_type,
-            main_channel,
-            sub_channel,
-            cost,
-            income,
-            begin_date,
-            end_date
+      <include refid="InvestMapper.invest_info_list" />
         FROM invest_info
         WHERE 1=1
         <if test="id != null and id != ''">
@@ -38,15 +34,7 @@
 
     <select id="queryInvestInfo" resultMap="RM-INVEST-INFO">
         SELECT
-        id ,
-        project_name,
-        project_type,
-        main_channel,
-        sub_channel,
-        cost,
-        income,
-        begin_date,
-        end_date
+        <include refid="InvestMapper.invest_info_list" />
         FROM invest_info
         WHERE id = #{id}
     </select>
