@@ -3,7 +3,7 @@ package com.ajayhao.simplelab.dal.entity;
 /**
  * Created by AjayHao on 2017/6/27.
  */
-public class TestInfo {
+public class TestInfo extends BaseDO{
     private String testId;
     private String testMsg;
     private int testVal;

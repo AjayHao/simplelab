@@ -21,6 +21,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.ajayhao.simplelab</groupId>
+            <artifactId>lab-base</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
         </dependency>

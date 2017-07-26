@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Created by AjayHao on 2017/7/13.
  */
-public class InvestInfo {
+public class InvestInfo extends BaseDO{
     private String id;
     private String projectName;
     private String projectType;

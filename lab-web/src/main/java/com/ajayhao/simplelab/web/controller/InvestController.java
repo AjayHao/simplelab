@@ -47,6 +47,7 @@ public class InvestController {
             if(set.contains(periodFlag)) {
                 InvestDTO investDTO = new InvestDTO();
                 investDTO.setAnnualYield(investService.calculateAnnualYield(investInfo));
+                logger.info("investInfo:"+ investInfo);
                 toOutCopier.copy(investInfo, investDTO, null);
                 logger.info("investDTO:"+ investDTO);
                 retList.add(investDTO);
