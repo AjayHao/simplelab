@@ -15,6 +15,7 @@
         <module>lab-base</module>
         <module>lab-dal</module>
         <module>lab-service</module>
+        <module>lab-remote</module>
         <module>lab-web</module>
     </modules>
 
@@ -29,6 +30,7 @@
         <lab-base.version>1.0.0-SNAPSHOT</lab-base.version>
         <lab-dal.version>1.0.0-SNAPSHOT</lab-dal.version>
         <lab-service.version>1.0.0-SNAPSHOT</lab-service.version>
+        <lab-remote.version>1.0.0-SNAPSHOT</lab-remote.version>
         <lab-web.version>1.0.0-SNAPSHOT</lab-web.version>
 
         <core-common.version>1.0.0-SNAPSHOT</core-common.version>
@@ -55,6 +57,12 @@
                 <groupId>com.ajayhao.simplelab</groupId>
                 <artifactId>lab-service</artifactId>
                 <version>${lab-service.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ajayhao.simplelab</groupId>
+                <artifactId>lab-remote</artifactId>
+                <version>${lab-remote.version}</version>
             </dependency>
 
             <dependency>

@@ -40,8 +40,8 @@ public class HotFixController {
         BaseResponse response = new BaseResponse();
 
         if(StringUtils.isAnyEmpty(beanId,methodName)){
-            response.setCode(BizCode.ParamError);
-            response.setMessage("执行失败:传入的beanId或方法名为空");
+            response.setRespCode(BizCode.ParamError.code());
+            response.setRespMsg("执行失败:传入的beanId或方法名为空");
         }
 
         if(StringUtils.isBlank(paramTypeStr)){
@@ -55,12 +55,12 @@ public class HotFixController {
 
         try {
             Object result = allRounderTool.execute(beanId, methodName, paramTypeStr, paramJsonStr);
-            response.setCode(BizCode.Success);
-            response.setMessage("执行成功!");
+            response.setRespCode(BizCode.Success.code());
+            response.setRespMsg("执行成功!");
             resultMap.put("返回值",result);
         }catch(Exception e){
-            response.setCode(BizCode.Unknown);
-            response.setMessage("执行失败：e=" + ExceptionUtils.getStackTrace(e));
+            response.setRespCode(BizCode.Unknown.code());
+            response.setRespMsg("执行失败：e=" + ExceptionUtils.getStackTrace(e));
         }
 
         resultMap.put("请求返回",response);

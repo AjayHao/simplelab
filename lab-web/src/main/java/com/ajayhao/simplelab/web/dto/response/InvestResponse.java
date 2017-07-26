@@ -14,31 +14,11 @@ import java.util.List;
  */
 //@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 
-public class InvestResponse implements Serializable {
+public class InvestResponse extends BaseResponse {
 
     private static final long serialVersionUID = -866530435174294000L;
 
-    private String retCode;
-
-    private String retMsg;
-
     private List<InvestDTO> investDTOs;
-
-    public String getRetMsg() {
-        return retMsg;
-    }
-
-    public void setRetMsg(String retMsg) {
-        this.retMsg = retMsg;
-    }
-
-    public String getRetCode() {
-        return retCode;
-    }
-
-    public void setRetCode(String retCode) {
-        this.retCode = retCode;
-    }
 
     public List<InvestDTO> getInvestDTOs() {
         return investDTOs;

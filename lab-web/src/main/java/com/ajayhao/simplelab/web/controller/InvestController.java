@@ -1,13 +1,15 @@
 package com.ajayhao.simplelab.web.controller;
 
-import com.ajayhao.core.enums.BizCode;
 import com.ajayhao.core.util.CoreDateUtils;
+import com.ajayhao.simplelab.base.enums.BizCode;
 import com.ajayhao.simplelab.dal.entity.InvestInfo;
 import com.ajayhao.simplelab.service.InvestService;
 import com.ajayhao.simplelab.web.dto.InvestDTO;
 import com.ajayhao.simplelab.web.dto.response.InvestResponse;
 import net.sf.cglib.beans.BeanCopier;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,8 @@ import java.util.*;
 public class InvestController {
     private BeanCopier toOutCopier = BeanCopier.create(InvestInfo.class, InvestDTO.class,false);
     private BeanCopier fromOutCopier = BeanCopier.create(InvestDTO.class, InvestInfo.class,false);
+
+    private static Logger logger = LoggerFactory.getLogger(InvestController.class);
 
     @Autowired
     private InvestService investService;
@@ -44,12 +48,13 @@ public class InvestController {
                 InvestDTO investDTO = new InvestDTO();
                 investDTO.setAnnualYield(investService.calculateAnnualYield(investInfo));
                 toOutCopier.copy(investInfo, investDTO, null);
+                logger.info("investDTO:"+ investDTO);
                 retList.add(investDTO);
             }
         }
 
-        response.setRetCode(BizCode.Success.code());
-        response.setRetMsg("查询成功");
+        response.setRespCode(BizCode.SUCCESS.getCode());
+        response.setRespMsg("查询成功");
         response.setInvestDTOs(retList);
         return response;
     }
@@ -74,8 +79,8 @@ public class InvestController {
         toOutCopier.copy(investInfo, investDTO, null);
         investDTO.setAnnualYield(investService.calculateAnnualYield(investInfo));
         retList.add(investDTO);
-        response.setRetCode(BizCode.Success.code());
-        response.setRetMsg("查询成功");
+        response.setRespCode(BizCode.SUCCESS.getCode());
+        response.setRespMsg("查询成功");
         response.setInvestDTOs(retList);
         return response;
     }

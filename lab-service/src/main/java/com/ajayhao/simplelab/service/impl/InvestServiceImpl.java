@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by AjayHao on 2017/7/13.
  */
-@Service
+@Service("investService")
 public class InvestServiceImpl implements InvestService {
 
     private static final BigDecimal DAYS_OF_YEAR = new BigDecimal("365");
