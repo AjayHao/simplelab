@@ -2,16 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="com.ajayhao.simplelab.test">
 
-    <!--<test name="lab_dal">
+    <test name="lab_dal" enabled="false">
         <classes>
             <class name="com.ajayhao.simplelab.test.dal.LabDAOTest" />
             <parameter name="testId" value="100" />
             <parameter name="testMsg" value="hahaha" />
             <parameter name="testVal" value="1" />
         </classes>
-    </test>-->
+    </test>
 
-    <test name="invest_dal" preserve-order="true">
+    <test name="invest_dal" preserve-order="true" enabled="false">
         <classes>
             <class name="com.ajayhao.simplelab.test.dal.InvestDAOTest" />
             <parameter name="id" value="aaa" />
@@ -24,6 +24,13 @@
             <parameter name="income1" value="222.2" />
             <parameter name="begindate1" value="20160101" />
             <parameter name="enddate1" value="20160303" />
+        </classes>
+    </test>
+
+
+    <test name="common_param_dal" enabled="true">
+        <classes>
+            <class name="com.ajayhao.simplelab.test.dal.CommonParamDAOTest" />
         </classes>
     </test>
 

@@ -6,5 +6,6 @@
     <mappers>
         <mapper resource="mybatis/mapper/TestInfoMapper.xml" />
         <mapper resource="mybatis/mapper/InvestInfoMapper.xml" />
+        <mapper resource="mybatis/mapper/CommonParamMapper.xml" />
     </mappers>
 </configuration>

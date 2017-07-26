@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ajayhao.simplelab.dal.mapper.CommonParamMapper">
+
+    <resultMap id="RM-COMMON-PARAM" type="com.ajayhao.simplelab.dal.entity.CommonParamDO">
+        <result property="paramGroup" column="param_group" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="paramName" column="param_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="paramValue" column="param_value" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Common_Param_List">
+          param_group, param_name, param_value
+    </sql>
+
+    <select id="queryParamList" resultMap="RM-COMMON-PARAM">
+        SELECT
+        <include refid="Common_Param_List" />
+        FROM common_params
+        <where>
+        <if test="paramGroup != null and paramGroup.length() > 0">
+        param_group = #{paramGroup}
+        </if>
+        <if test="paramName != null and paramName.length() > 0">
+        AND param_name = #{paramName}
+        </if>
+        </where>
+    </select>
+
+</mapper>

@@ -10,10 +10,13 @@ import java.util.List;
  */
 public interface CommonParamMapper {
 
-    List<CommonParamDO> queryCommonParamList();
-
-    List<CommonParamDO> queryCommonParamList(@Param("paramGroup") String paramGroup);
-
-    CommonParamDO queryCommonParamDO(@Param("paramGroup") String paramGroup,
+    /**
+     * 查询配置参数列表.
+     *
+     * @param paramGroup 参数组名
+     * @param paramName  参数名
+     * @return 参数列表
+     */
+    List<CommonParamDO> queryParamList(@Param("paramGroup") String paramGroup,
                                      @Param("paramName") String paramName);
 }

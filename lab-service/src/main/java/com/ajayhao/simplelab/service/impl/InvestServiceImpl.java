@@ -4,6 +4,8 @@ import com.ajayhao.core.util.CoreDateUtils;
 import com.ajayhao.simplelab.dal.InvestDAO;
 import com.ajayhao.simplelab.dal.entity.InvestInfo;
 import com.ajayhao.simplelab.service.InvestService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,6 +20,8 @@ import java.util.List;
 @Service("investService")
 public class InvestServiceImpl implements InvestService {
 
+    Logger log = LoggerFactory.getLogger(InvestServiceImpl.class);
+
     private static final BigDecimal DAYS_OF_YEAR = new BigDecimal("365");
     private static final BigDecimal ONE_HUNDRED = new BigDecimal("100.00");
 
@@ -31,6 +35,7 @@ public class InvestServiceImpl implements InvestService {
 
     @Override
     public List<InvestInfo> queryInvestInfoList() {
+        log.info("","");
         return investDAO.queryInvestInfoList();
     }
 

@@ -20,6 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 //非事务
 // public class DALTest extends AbstractTestNGSpringContextTests {
 //事务
-public class DALTest extends AbstractTransactionalTestNGSpringContextTests {
+public abstract class DALTest extends AbstractTransactionalTestNGSpringContextTests {
 
 }

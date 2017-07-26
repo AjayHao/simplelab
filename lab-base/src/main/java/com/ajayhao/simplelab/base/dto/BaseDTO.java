@@ -31,17 +31,6 @@ public abstract class BaseDTO implements Serializable, Cloneable {
         return SerializationUtils.clone(this);
     }
 
-    public static String toJson(Object object) {
-        return GSON.toJson(object);
-    }
-
-    public static <T> T fromJson(String json, Class<T> classOfT) {
-        return GSON.fromJson(json, classOfT);
-    }
-
-    public static <T> T fromJson(String json, Type typeOfT) {
-        return GSON.fromJson(json, typeOfT);
-    }
 }
 
 
