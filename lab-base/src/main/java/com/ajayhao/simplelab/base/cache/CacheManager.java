@@ -6,5 +6,6 @@ package com.ajayhao.simplelab.base.cache;
 public interface CacheManager {
 
 
+    long expire(String key, int seconds);
 
 }
