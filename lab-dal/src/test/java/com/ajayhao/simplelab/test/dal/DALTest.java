@@ -1,8 +1,10 @@
 package com.ajayhao.simplelab.test.dal;
 
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.BeforeSuite;
 
 /**
  * Created by AjayHao on 2017/7/11.
@@ -21,5 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 // public class DALTest extends AbstractTestNGSpringContextTests {
 //事务
 public abstract class DALTest extends AbstractTransactionalTestNGSpringContextTests {
+    @BeforeSuite(alwaysRun = true)
+    public void setUp(){
+        MockitoAnnotations.initMocks(this); //基于spring自动装配注解
+    }
 
 }
