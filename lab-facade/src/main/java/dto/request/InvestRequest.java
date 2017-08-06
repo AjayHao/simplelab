@@ -1,4 +1,4 @@
-package com.ajayhao.simplelab.web.dto.request;
+package dto.request;
 
 import com.ajayhao.simplelab.base.BaseRequest;
 

@@ -1,4 +1,4 @@
-package com.ajayhao.simplelab.web.dto;
+package dto;
 
 import com.ajayhao.simplelab.base.dto.BaseDTO;
 

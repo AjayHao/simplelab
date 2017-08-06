@@ -21,9 +21,15 @@
         </dependency>
 
         <dependency>
+            <groupId>com.ajayhao.public</groupId>
+            <artifactId>lab-facade</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
+
 
     </dependencies>
 

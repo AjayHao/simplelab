@@ -23,10 +23,10 @@
             <artifactId>lab-base</artifactId>
         </dependency>
 
-<!--                <dependency>
-                    <groupId>com.ajayhao.simplelab</groupId>
-                    <artifactId>lab-facade</artifactId>
-                </dependency>-->
+        <dependency>
+            <groupId>com.ajayhao.simplelab</groupId>
+            <artifactId>lab-facade</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.ajayhao.simplelab</groupId>

@@ -35,7 +35,6 @@ public class InvestServiceImpl implements InvestService {
 
     @Override
     public List<InvestInfo> queryInvestInfoList() {
-        log.info("","");
         return investDAO.queryInvestInfoList();
     }
 

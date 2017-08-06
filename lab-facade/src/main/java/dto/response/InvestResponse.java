@@ -1,12 +1,9 @@
-package com.ajayhao.simplelab.web.dto.response;
+package dto.response;
 
 
 import com.ajayhao.simplelab.base.BaseResponse;
-import com.ajayhao.simplelab.web.dto.InvestDTO;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import dto.InvestDTO;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**

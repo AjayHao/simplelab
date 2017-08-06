@@ -13,6 +13,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>lab-base</module>
+        <module>lab-facade</module>
         <module>lab-dal</module>
         <module>lab-cl</module>
         <module>lab-service</module>
@@ -29,6 +30,7 @@
 
         <!-- local module version-->
         <lab-base.version>1.0.0-SNAPSHOT</lab-base.version>
+        <lab-facade.version>1.0.0</lab-facade.version>
         <lab-cl.version>1.0.0-SNAPSHOT</lab-cl.version>
         <lab-dal.version>1.0.0-SNAPSHOT</lab-dal.version>
         <lab-service.version>1.0.0-SNAPSHOT</lab-service.version>
@@ -47,6 +49,12 @@
                 <groupId>com.ajayhao.simplelab</groupId>
                 <artifactId>lab-base</artifactId>
                 <version>${lab-base.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ajayhao.simplelab</groupId>
+                <artifactId>lab-facade</artifactId>
+                <version>${lab-facade.version}</version>
             </dependency>
 
             <dependency>
