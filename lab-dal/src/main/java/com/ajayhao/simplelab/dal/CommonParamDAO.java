@@ -14,5 +14,5 @@ public interface CommonParamDAO {
 
     List<CommonParamDO> queryByGroup(String paramGroup);
 
-    CommonParamDO queryByGroupAndName(String paramGroup, String paramName) throws BaseException;
+    CommonParamDO queryByGroupAndCode(String paramGroup, String paramCode) throws BaseException;
 }

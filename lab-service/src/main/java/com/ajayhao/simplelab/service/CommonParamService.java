@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface CommonParamService {
 
-    CommonParamDTO getParamByGroupAndParam(String groupName, String paramName) throws BaseException;
+    CommonParamDTO getParamByGroupAndCode(String groupName, String paramCode) throws BaseException;
 
 }

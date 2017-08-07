@@ -55,8 +55,8 @@ public class InvestController {
                 investDTO.setAnnualYield(investService.calculateAnnualYield(investInfo));
                 toOutCopier.copy(investInfo, investDTO, null);
                 try {
-                    CommonParamDTO paramDTO = commonParamService.getParamByGroupAndParam("aaa","bbb");
-                    investDTO.setProjectTypeDes(paramDTO.getParamName());
+                    CommonParamDTO paramDTO = commonParamService.getParamByGroupAndCode("aaa","bbb");
+                    investDTO.setProjectTypeDe(paramDTO.getParamCode());
                 } catch (BaseException e) {
                     e.printStackTrace();
                 }

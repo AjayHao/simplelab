@@ -30,14 +30,14 @@ public class CommonParamDAOImpl implements CommonParamDAO{
     }
 
     @Override
-    public CommonParamDO queryByGroupAndName(String paramGroup, String paramName) throws BaseException {
-        List<CommonParamDO> list = commonParamMapper.queryParamList(paramGroup, paramName);
+    public CommonParamDO queryByGroupAndCode(String paramGroup, String paramCode) throws BaseException {
+        List<CommonParamDO> list = commonParamMapper.queryParamList(paramGroup, paramCode);
         if(CollectionUtils.isEmpty(list)){
             return null;
         }else if(list.size() == 1){
             return list.get(0);
         }else{
-            throw new BaseException("配置有错误，存在重复的参数配置项-组名：{}，变量名：{}",paramGroup, paramName);
+            throw new BaseException("配置有错误，存在重复的参数配置项-组名：{}，变量名：{}",paramGroup, paramCode);
         }
     }
 }

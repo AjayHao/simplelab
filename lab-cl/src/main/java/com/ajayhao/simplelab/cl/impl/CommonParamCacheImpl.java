@@ -67,7 +67,7 @@ public class CommonParamCacheImpl implements CommonParamCache{
             Map<String,String> map = new HashMap<>();
             for(CommonParamDTO param : paramList){
                 if(groupName.equals(param.getParamGroup())) {
-                    map.put(param.getParamName(), param.getParamValue());
+                    map.put(param.getParamCode(), param.getParamValue());
                 }
             }
             try {
@@ -96,19 +96,19 @@ public class CommonParamCacheImpl implements CommonParamCache{
     }
 
     @Override
-    public String getByNameKey(String groupName, String paramName) {
+    public String getByNameKey(String groupName, String paramCode) {
         lock.readLock().lock();
         String retStr = null;
         Map<String, String> map = null;
         try {
             map = jedisManager.getMap(groupName);
-            retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramName);
+            retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramCode);
         }catch(Exception e){
             logger.warn("系统异常", e);
             if(localFailOver) {
                 logger.info("===切换到本地缓存");
                 map = localMap.get(groupName);
-                retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramName);
+                retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramCode);
             }
         }finally {
             lock.readLock().unlock();

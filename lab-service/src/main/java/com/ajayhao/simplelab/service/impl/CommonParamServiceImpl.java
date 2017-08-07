@@ -31,10 +31,10 @@ public class CommonParamServiceImpl implements CommonParamService {
     private CommonParamCache commonParamCache;
 
     @Override
-    public CommonParamDTO getParamByGroupAndParam(String groupName, String paramName) throws BaseException {
+    public CommonParamDTO getParamByGroupAndCode(String groupName, String paramCode) throws BaseException {
         CommonParamDTO paramDTO = null;
         if(cacheEnabled){
-            String paramValue = commonParamCache.getByNameKey(groupName, paramName);
+            String paramValue = commonParamCache.getByNameKey(groupName, paramCode);
             if(StringUtils.isBlank(paramValue)){
                 List<CommonParamDO> paramList = commonParamDAO.queryByGroup(groupName);
                 if(CollectionUtils.isEmpty(paramList)){
@@ -42,10 +42,10 @@ public class CommonParamServiceImpl implements CommonParamService {
                 }
                 commonParamCache.initData(groupName, transferDtoList(paramList));
             }
-            paramValue = commonParamCache.getByNameKey(groupName, paramName);
-            paramDTO =  new CommonParamDTO(groupName, paramName, paramValue);
+            paramValue = commonParamCache.getByNameKey(groupName, paramCode);
+            paramDTO =  new CommonParamDTO(groupName, paramCode, paramValue);
         }else{
-            CommonParamDO paramDO = commonParamDAO.queryByGroupAndName(groupName, paramName);
+            CommonParamDO paramDO = commonParamDAO.queryByGroupAndCode(groupName, paramCode);
             paramDTO = transferDto(paramDO);
         }
         return paramDTO;
@@ -63,7 +63,7 @@ public class CommonParamServiceImpl implements CommonParamService {
     private CommonParamDTO transferDto(CommonParamDO _do){
         CommonParamDTO _dto = new CommonParamDTO();
         _dto.setParamGroup(_do.getParamGroup());
-        _dto.setParamName(_do.getParamName());
+        _dto.setParamCode(_do.getParamCode());
         _dto.setParamValue(_do.getParamValue());
         return _dto;
     }

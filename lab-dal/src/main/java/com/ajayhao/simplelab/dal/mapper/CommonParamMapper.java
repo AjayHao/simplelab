@@ -14,9 +14,9 @@ public interface CommonParamMapper {
      * 查询配置参数列表.
      *
      * @param paramGroup 参数组名
-     * @param paramName  参数名
+     * @param paramCode  参数代码
      * @return 参数列表
      */
     List<CommonParamDO> queryParamList(@Param("paramGroup") String paramGroup,
-                                     @Param("paramName") String paramName);
+                                     @Param("paramCode") String paramCode);
 }

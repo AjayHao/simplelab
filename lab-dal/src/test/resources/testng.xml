@@ -11,12 +11,11 @@
         </classes>
     </test>
 
-    <test name="invest_dal" enabled="false">
+    <test name="invest_dal" preserve-order="true" enabled="false">
         <classes>
             <class name="com.ajayhao.simplelab.test.dal.InvestDAOTest" />
-            <parameter name="id" value="aaa" />
+            <parameter name="id" value="47" />
 
-            <parameter name="id1" value="bbb" />
             <parameter name="project1" value="asfddsaf" />
             <parameter name="mainchannel1" value="001" />
             <parameter name="subchannel1" value="002" />
@@ -28,7 +27,7 @@
     </test>
 
 
-    <test name="common_param_dal" enabled="true">
+    <test name="common_param_dal" enabled="false">
         <classes>
             <class name="com.ajayhao.simplelab.test.dal.CommonParamDAOTest" />
         </classes>

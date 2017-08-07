@@ -25,24 +25,23 @@ public class InvestDAOTest extends DALTest{
     @Test
     public void testQueryInvestInfoList(){
         List<InvestInfo> list = investDAO.queryInvestInfoList();
-        Assert.assertEquals(list.size() , 2);
+        Assert.assertEquals(list.size() , 23);
     }
 
     @Test
     @Parameters({"id"})
     public void testQueryInvestInfo(String id){
         InvestInfo info = investDAO.queryInvestInfo(id);
-        BigDecimal expected = new BigDecimal("10000.00");
+        BigDecimal expected = new BigDecimal("50000.00");
         Assert.assertEquals(info.getCost(),expected);
     }
 
     @Test
     @Rollback(false)
-    @Parameters({"id1","project1","mainchannel1","subchannel1","cost1","income1","begindate1","enddate1"})
-    public void testInsertTestInfo(String id, String projectName, String mainchannel, String subchannel, String cost, String income,
+    @Parameters({"project1","mainchannel1","subchannel1","cost1","income1","begindate1","enddate1"})
+    public void testInsertTestInfo(String projectName, String mainchannel, String subchannel, String cost, String income,
                                    String begindate, String enddate){
         InvestInfo i = new InvestInfo();
-        i.setId(id);
         i.setProjectName(projectName);
         i.setMainChannel(mainchannel);
         i.setSubChannel(subchannel);

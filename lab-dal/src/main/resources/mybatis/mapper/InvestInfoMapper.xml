@@ -5,19 +5,23 @@
 <mapper namespace="com.ajayhao.simplelab.dal.mapper.InvestMapper">
 
     <resultMap id="RM-INVEST-INFO" type="com.ajayhao.simplelab.dal.entity.InvestInfo">
-        <result property="id" column="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result property="projectName" column="project_name" javaType="string" jdbcType="VARCHAR"/>
-        <result property="projectType" column="project_type" javaType="string" jdbcType="VARCHAR"/>
-        <result property="mainChannel" column="main_channel" javaType="string" jdbcType="VARCHAR"/>
-        <result property="subChannel" column="sub_channel" javaType="string" jdbcType="VARCHAR"/>
+        <result property="id" column="id" javaType="long" jdbcType="BIGINT"/>
+        <result property="projectName" column="project_name" />
+        <result property="projectType" column="project_type" />
+        <result property="mainChannel" column="main_channel" />
+        <result property="subChannel" column="sub_channel" />
         <result property="cost" column="cost" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
         <result property="income" column="income" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
-        <result property="beginDate" column="begin_date" javaType="string" jdbcType="VARCHAR"/>
-        <result property="endDate" column="end_date" javaType="string" jdbcType="VARCHAR"/>
+        <result property="beginDate" column="begin_date" />
+        <result property="endDate" column="end_date" />
+        <result property="creatorId" column="creator_id" />
+        <result property="createTm" column="create_tm" />
+        <result property="modifierId" column="modifier_id" />
+        <result property="modifyTm" column="modify_tm" />
     </resultMap>
 
     <sql id="Invest_Info_List">
-          id, project_name, project_type, main_channel, sub_channel, cost, income, begin_date, end_date
+          id, project_name, project_type, main_channel, sub_channel, cost, income, begin_date, end_date, creator_id, create_tm, modifier_id, modify_tm
     </sql>
 
     <select id="queryInvestInfoList" resultMap="RM-INVEST-INFO">
@@ -41,8 +45,7 @@
 
     <insert id="insertInvestInfo">
         insert into invest_info
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-                id,
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
             <if test="projectName != null" >
                 project_name,
             </if>
@@ -67,10 +70,16 @@
             <if test="endDate != null" >
                 end_date,
             </if>
-            tm
+            <if test="creatorId != null" >
+                creator_id,
+            </if>
+            <if test="modifierId != null" >
+                modifier_id,
+            </if>
+                create_tm,
+                modify_tm,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-                #{id,jdbcType=VARCHAR},
             <if test="projectName != null" >
                 #{projectName,jdbcType=VARCHAR},
             </if>
@@ -95,7 +104,14 @@
             <if test="endDate != null" >
                 #{endDate,jdbcType=VARCHAR},
             </if>
-            now()
+            <if test="creatorId != null" >
+                #{creatorId,jdbcType=VARCHAR},
+            </if>
+            <if test="modifierId != null" >
+                #{modifierId,jdbcType=VARCHAR},
+            </if>
+            now(),
+            now(),
         </trim>
     </insert>
 </mapper>

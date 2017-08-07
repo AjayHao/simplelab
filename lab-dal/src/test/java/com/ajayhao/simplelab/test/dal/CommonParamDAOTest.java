@@ -39,7 +39,7 @@ public class CommonParamDAOTest extends DALTest{
     public void testQueryCommonParamByGroupAndName(){
         CommonParamDO commonParamDO = null;
         try {
-            commonParamDO = commonParamDAO.queryByGroupAndName("aaa","bbb");
+            commonParamDO = commonParamDAO.queryByGroupAndCode("aaa","bbb");
         } catch (BaseException e) {
             e.printStackTrace();
         }
@@ -52,7 +52,7 @@ public class CommonParamDAOTest extends DALTest{
         mockSetUp();
         CommonParamDO commonParamDO = null;
         try {
-            commonParamDO = commonParamDAOMock.queryByGroupAndName("aaa","bbb");
+            commonParamDO = commonParamDAOMock.queryByGroupAndCode("aaa","bbb");
         } catch (BaseException e) {
             e.printStackTrace();
         }
@@ -62,10 +62,10 @@ public class CommonParamDAOTest extends DALTest{
     private void mockSetUp() {
         CommonParamDO mockCommonParamDO = new CommonParamDO();
         mockCommonParamDO.setParamGroup("abc");
-        mockCommonParamDO.setParamName("name");
+        mockCommonParamDO.setParamCode("name");
         mockCommonParamDO.setParamValue("val");
         try {
-            when(commonParamDAOMock.queryByGroupAndName(anyString(),anyString())).thenReturn(mockCommonParamDO);
+            when(commonParamDAOMock.queryByGroupAndCode(anyString(),anyString())).thenReturn(mockCommonParamDO);
         } catch (BaseException e) {
             e.printStackTrace();
         }

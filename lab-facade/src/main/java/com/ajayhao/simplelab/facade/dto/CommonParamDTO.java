@@ -12,17 +12,19 @@ public class CommonParamDTO extends BaseDTO implements Serializable {
 
     public CommonParamDTO(){}
 
-    public CommonParamDTO(String paramGroup, String paramName, String paramValue){
+    public CommonParamDTO(String paramGroup, String paramCode, String paramValue){
         this.paramGroup = paramGroup;
-        this.paramName = paramName;
+        this.paramCode = paramCode;
         this.paramValue = paramValue;
     }
 
     private String paramGroup;
 
-    private String paramName;
+    private String paramCode;
 
     private String paramValue;
+
+    private String paramDesc;
 
     public String getParamGroup() {
         return paramGroup;
@@ -32,12 +34,12 @@ public class CommonParamDTO extends BaseDTO implements Serializable {
         this.paramGroup = paramGroup;
     }
 
-    public String getParamName() {
-        return paramName;
+    public String getParamCode() {
+        return paramCode;
     }
 
-    public void setParamName(String paramName) {
-        this.paramName = paramName;
+    public void setParamCode(String paramCode) {
+        this.paramCode = paramCode;
     }
 
     public String getParamValue() {
@@ -48,4 +50,11 @@ public class CommonParamDTO extends BaseDTO implements Serializable {
         this.paramValue = paramValue;
     }
 
+    public String getParamDesc() {
+        return paramDesc;
+    }
+
+    public void setParamDesc(String paramDesc) {
+        this.paramDesc = paramDesc;
+    }
 }
