@@ -1,8 +1,7 @@
-package dto.response;
+package com.ajayhao.simplelab.facade.dto.response;
 
-
-import com.ajayhao.simplelab.base.BaseResponse;
-import dto.InvestDTO;
+import com.ajayhao.simplelab.facade.dto.InvestDTO;
+import com.ajayhao.simplelab.facade.dto.common.BaseResponse;
 
 import java.util.List;
 

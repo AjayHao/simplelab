@@ -1,6 +1,6 @@
 package com.ajayhao.simplelab.dal;
 
-import com.ajayhao.simplelab.base.BaseException;
+import com.ajayhao.simplelab.base.exception.BaseException;
 import com.ajayhao.simplelab.dal.entity.CommonParamDO;
 
 import java.util.List;

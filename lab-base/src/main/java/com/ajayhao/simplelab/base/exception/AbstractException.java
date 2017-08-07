@@ -1,9 +1,6 @@
 package com.ajayhao.simplelab.base.exception;
 
-import com.ajayhao.simplelab.base.enums.BizCode;
 import org.slf4j.helpers.MessageFormatter;
-
-import java.text.MessageFormat;
 
 /**
  * Created by AjayHao on 2017/7/26.

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ajayhao.simplelab.dal.mapper.CommonParamMapper">
+<mapper namespace="com.ajayhao.simplelab.dal.mapper.InvestMapper">
 
     <resultMap id="RM-INVEST-INFO" type="com.ajayhao.simplelab.dal.entity.InvestInfo">
         <result property="id" column="id" javaType="java.lang.String" jdbcType="VARCHAR"/>

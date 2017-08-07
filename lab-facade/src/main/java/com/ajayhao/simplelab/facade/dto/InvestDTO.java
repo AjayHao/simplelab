@@ -1,6 +1,6 @@
-package dto;
+package com.ajayhao.simplelab.facade.dto;
 
-import com.ajayhao.simplelab.base.dto.BaseDTO;
+import com.ajayhao.simplelab.facade.dto.common.BaseDTO;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

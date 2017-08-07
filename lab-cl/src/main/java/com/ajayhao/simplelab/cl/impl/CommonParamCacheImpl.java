@@ -1,13 +1,12 @@
 package com.ajayhao.simplelab.cl.impl;
 
-import com.ajayhao.simplelab.base.cache.impl.JedisManager;
+import com.ajayhao.simplelab.base.cache.redis.JedisManager;
 import com.ajayhao.simplelab.cl.CommonParamCache;
-import dto.CommonParamDTO;
+import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

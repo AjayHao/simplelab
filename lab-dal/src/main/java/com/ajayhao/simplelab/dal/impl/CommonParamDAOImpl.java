@@ -1,7 +1,6 @@
 package com.ajayhao.simplelab.dal.impl;
 
-import com.ajayhao.simplelab.base.BaseException;
-import com.ajayhao.simplelab.base.exception.AbstractException;
+import com.ajayhao.simplelab.base.exception.BaseException;
 import com.ajayhao.simplelab.dal.CommonParamDAO;
 import com.ajayhao.simplelab.dal.entity.CommonParamDO;
 import com.ajayhao.simplelab.dal.mapper.CommonParamMapper;

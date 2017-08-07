@@ -1,14 +1,14 @@
-package com.ajayhao.simplelab.base;
+package com.ajayhao.simplelab.base.exception;
 
-import com.ajayhao.simplelab.base.enums.BizCode;
 import com.ajayhao.simplelab.base.exception.AbstractException;
+import com.ajayhao.simplelab.facade.enums.BizCode;
 
 import java.text.MessageFormat;
 
 /**
  * Created by AjayHao on 2017/7/26.
  */
-public class BaseException extends AbstractException{
+public class BaseException extends AbstractException {
 
     public BaseException(String msg, String ... params){
         super(msg, params);

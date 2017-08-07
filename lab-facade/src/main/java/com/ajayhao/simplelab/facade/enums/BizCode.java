@@ -1,6 +1,6 @@
-package com.ajayhao.simplelab.base.enums;
+package com.ajayhao.simplelab.facade.enums;
 
-import com.ajayhao.simplelab.base.dto.AbstractBizCode;
+import com.ajayhao.simplelab.facade.enums.AbstractBizCode;
 
 /**
  * Created by AjayHao on 2017/7/25.

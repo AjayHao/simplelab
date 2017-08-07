@@ -1,11 +1,10 @@
-package com.ajayhao.simplelab.base.dto;
+package com.ajayhao.simplelab.facade.dto.common;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 
 /**
  * Created by AjayHao on 2017/7/19.

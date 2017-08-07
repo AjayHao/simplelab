@@ -2,7 +2,7 @@ package com.ajayhao.simplelab.web.controller;
 
 import com.ajayhao.core.enums.BizCode;
 import com.ajayhao.core.util.CoreObjectUtils;
-import com.ajayhao.simplelab.base.BaseResponse;
+import com.ajayhao.simplelab.facade.dto.common.BaseResponse;
 import com.ajayhao.simplelab.web.toolbox.AllRounderTool;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;

@@ -1,7 +1,6 @@
-package com.ajayhao.simplelab.base;
+package com.ajayhao.simplelab.facade.dto.common;
 
-import com.ajayhao.simplelab.base.dto.BaseDTO;
-import com.ajayhao.simplelab.base.enums.BizCode;
+import com.ajayhao.simplelab.facade.enums.BizCode;
 
 import java.io.Serializable;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package com.ajayhao.simplelab.base.dto;
+package com.ajayhao.simplelab.facade.enums;
 
 /**
  * Created by AjayHao on 2017/7/25.

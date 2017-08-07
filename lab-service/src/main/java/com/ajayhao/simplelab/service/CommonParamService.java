@@ -1,7 +1,6 @@
 package com.ajayhao.simplelab.service;
 
-import dto.CommonParamDTO;
-
+import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
 import java.util.List;
 
 /**

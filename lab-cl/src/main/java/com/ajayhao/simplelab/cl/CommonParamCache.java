@@ -1,9 +1,7 @@
 package com.ajayhao.simplelab.cl;
 
-import com.ajayhao.simplelab.base.dto.BaseDTO;
-import dto.CommonParamDTO;
+import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**

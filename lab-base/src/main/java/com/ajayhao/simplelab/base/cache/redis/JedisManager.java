@@ -1,4 +1,4 @@
-package com.ajayhao.simplelab.base.cache.impl;
+package com.ajayhao.simplelab.base.cache.redis;
 
 import com.ajayhao.simplelab.base.cache.CacheManager;
 import redis.clients.jedis.JedisPoolConfig;

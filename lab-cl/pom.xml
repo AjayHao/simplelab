@@ -21,7 +21,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.ajayhao.public</groupId>
+            <groupId>com.ajayhao.simplelab</groupId>
             <artifactId>lab-facade</artifactId>
         </dependency>
 

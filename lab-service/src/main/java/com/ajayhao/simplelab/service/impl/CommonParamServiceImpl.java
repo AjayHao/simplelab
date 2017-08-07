@@ -2,8 +2,8 @@ package com.ajayhao.simplelab.service.impl;
 
 import com.ajayhao.simplelab.cl.CommonParamCache;
 import com.ajayhao.simplelab.dal.CommonParamDAO;
+import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
 import com.ajayhao.simplelab.service.CommonParamService;
-import dto.CommonParamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
