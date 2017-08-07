@@ -17,6 +17,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath*:spring/spring-properties-loader.xml,
+            classpath*:spring/spring-lab-cl.xml,
             classpath*:spring/spring-lab-dal.xml,
             classpath*:spring/spring-biz-service.xml,
             classpath*:spring/spring-biz-mq.xml

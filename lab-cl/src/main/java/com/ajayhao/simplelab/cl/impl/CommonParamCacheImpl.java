@@ -104,8 +104,12 @@ public class CommonParamCacheImpl implements CommonParamCache{
             map = jedisManager.getMap(groupName);
             retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramName);
         }catch(Exception e){
-            map = localMap.get(groupName);
-            retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramName);
+            logger.warn("系统异常", e);
+            if(localFailOver) {
+                logger.info("===切换到本地缓存");
+                map = localMap.get(groupName);
+                retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramName);
+            }
         }finally {
             lock.readLock().unlock();
         }

@@ -15,6 +15,7 @@ public class InvestDTO extends BaseDTO implements Serializable{
     private String id;
     private String projectName;
     private String projectType;
+    private String projectTypeDes;
     private String mainChannel;
     private String subChannel;
     private BigDecimal cost;
@@ -101,5 +102,13 @@ public class InvestDTO extends BaseDTO implements Serializable{
 
     public void setAnnualYield(BigDecimal annualYield) {
         this.annualYield = annualYield;
+    }
+
+    public String getProjectTypeDes() {
+        return projectTypeDes;
+    }
+
+    public void setProjectTypeDes(String projectTypeDes) {
+        this.projectTypeDes = projectTypeDes;
     }
 }

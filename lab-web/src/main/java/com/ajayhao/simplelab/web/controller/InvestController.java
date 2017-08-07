@@ -1,7 +1,9 @@
 package com.ajayhao.simplelab.web.controller;
 
 import com.ajayhao.core.util.CoreDateUtils;
+import com.ajayhao.simplelab.base.exception.BaseException;
 import com.ajayhao.simplelab.dal.entity.InvestInfo;
+import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
 import com.ajayhao.simplelab.facade.dto.InvestDTO;
 import com.ajayhao.simplelab.facade.dto.response.InvestResponse;
 import com.ajayhao.simplelab.facade.enums.BizCode;
@@ -51,9 +53,13 @@ public class InvestController {
             if(set.contains(periodFlag)) {
                 InvestDTO investDTO = new InvestDTO();
                 investDTO.setAnnualYield(investService.calculateAnnualYield(investInfo));
-                logger.info("investInfo:"+ investInfo);
                 toOutCopier.copy(investInfo, investDTO, null);
-                logger.info("investDTO:"+ investDTO);
+                try {
+                    CommonParamDTO paramDTO = commonParamService.getParamByGroupAndParam("aaa","bbb");
+                    investDTO.setProjectTypeDes(paramDTO.getParamName());
+                } catch (BaseException e) {
+                    e.printStackTrace();
+                }
                 retList.add(investDTO);
             }
         }
