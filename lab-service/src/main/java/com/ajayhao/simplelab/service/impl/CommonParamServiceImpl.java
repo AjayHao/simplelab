@@ -1,21 +1,28 @@
 package com.ajayhao.simplelab.service.impl;
 
+import com.ajayhao.simplelab.base.exception.BaseException;
 import com.ajayhao.simplelab.cl.CommonParamCache;
 import com.ajayhao.simplelab.dal.CommonParamDAO;
+import com.ajayhao.simplelab.dal.entity.CommonParamDO;
 import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
 import com.ajayhao.simplelab.service.CommonParamService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by AjayHao on 2017/8/7.
  */
+@Service("commonParamService")
 public class CommonParamServiceImpl implements CommonParamService {
 
-    @Value("${redis.enabled}")
-    private String cacheEnabled;
+    @Value("${cache.enabled}")
+    private boolean cacheEnabled;
 
     @Autowired
     private CommonParamDAO commonParamDAO;
@@ -24,17 +31,41 @@ public class CommonParamServiceImpl implements CommonParamService {
     private CommonParamCache commonParamCache;
 
     @Override
-    public List<CommonParamDTO> getParams() {
-        return null;
+    public CommonParamDTO getParamByGroupAndParam(String groupName, String paramName) throws BaseException {
+        CommonParamDTO paramDTO = null;
+        if(cacheEnabled){
+            String paramValue = commonParamCache.getByNameKey(groupName, paramName);
+            if(StringUtils.isBlank(paramValue)){
+                List<CommonParamDO> paramList = commonParamDAO.queryByGroup(groupName);
+                if(CollectionUtils.isEmpty(paramList)){
+                    throw new BaseException("参数配置表中groupName为{}的参数项未配置", groupName);
+                }
+                commonParamCache.initData(groupName, transferDtoList(paramList));
+            }
+            paramValue = commonParamCache.getByNameKey(groupName, paramName);
+            paramDTO =  new CommonParamDTO(groupName, paramName, paramValue);
+        }else{
+            CommonParamDO paramDO = commonParamDAO.queryByGroupAndName(groupName, paramName);
+            paramDTO = transferDto(paramDO);
+        }
+        return paramDTO;
     }
 
-    @Override
-    public List<CommonParamDTO> getParamByGroupName(String groupName) {
-        return null;
+    private List<CommonParamDTO> transferDtoList(List<CommonParamDO> doList){
+        List<CommonParamDTO> dtoList = new ArrayList<>();
+        for(CommonParamDO _do : doList){
+            CommonParamDTO _dto = transferDto(_do);
+            dtoList.add(_dto);
+        }
+        return dtoList;
     }
 
-    @Override
-    public CommonParamDTO getParamByGroupAndParam(String groupName, String paramName) {
-        return null;
+    private CommonParamDTO transferDto(CommonParamDO _do){
+        CommonParamDTO _dto = new CommonParamDTO();
+        _dto.setParamGroup(_do.getParamGroup());
+        _dto.setParamName(_do.getParamName());
+        _dto.setParamValue(_do.getParamValue());
+        return _dto;
     }
+
 }

@@ -10,6 +10,14 @@ import java.io.Serializable;
 public class CommonParamDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 4467044355295269210L;
 
+    public CommonParamDTO(){}
+
+    public CommonParamDTO(String paramGroup, String paramName, String paramValue){
+        this.paramGroup = paramGroup;
+        this.paramName = paramName;
+        this.paramValue = paramValue;
+    }
+
     private String paramGroup;
 
     private String paramName;

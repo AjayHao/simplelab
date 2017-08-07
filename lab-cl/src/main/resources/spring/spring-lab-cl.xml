@@ -30,7 +30,7 @@
         </bean>
     </util:list>
 
-    <bean id="jedisManager" class="com.ajayhao.simplelab.base.cache.redis.JedisManager">
+    <bean id="jedisManager" class="com.ajayhao.simplelab.base.cache.redis.JedisManager" >
         <property name="jedisPoolConfig" ref="jedisPoolConfig" />
         <property name="jedisServerList" ref="jedisServerList" />
     </bean>

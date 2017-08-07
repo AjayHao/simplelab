@@ -5,6 +5,7 @@ import com.ajayhao.simplelab.dal.entity.InvestInfo;
 import com.ajayhao.simplelab.facade.dto.InvestDTO;
 import com.ajayhao.simplelab.facade.dto.response.InvestResponse;
 import com.ajayhao.simplelab.facade.enums.BizCode;
+import com.ajayhao.simplelab.service.CommonParamService;
 import com.ajayhao.simplelab.service.InvestService;
 import net.sf.cglib.beans.BeanCopier;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,9 @@ public class InvestController {
 
     @Autowired
     private InvestService investService;
+
+    @Autowired
+    private CommonParamService commonParamService;
 
     /*此处需要留意顺序，/list会与/{id}的匹配方式混淆，因此必须填入periods参数以区分*/
     @RequestMapping(path="/list" , method = {RequestMethod.GET})

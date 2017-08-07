@@ -3,6 +3,7 @@ package com.ajayhao.simplelab.service.impl;
 import com.ajayhao.core.util.CoreDateUtils;
 import com.ajayhao.simplelab.dal.InvestDAO;
 import com.ajayhao.simplelab.dal.entity.InvestInfo;
+import com.ajayhao.simplelab.service.CommonParamService;
 import com.ajayhao.simplelab.service.InvestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

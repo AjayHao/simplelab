@@ -1,5 +1,6 @@
 package com.ajayhao.simplelab.service;
 
+import com.ajayhao.simplelab.base.exception.BaseException;
 import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
 import java.util.List;
 
@@ -8,10 +9,6 @@ import java.util.List;
  */
 public interface CommonParamService {
 
-    List<CommonParamDTO> getParams();
-
-    List<CommonParamDTO> getParamByGroupName(String groupName);
-
-    CommonParamDTO getParamByGroupAndParam(String groupName, String paramName);
+    CommonParamDTO getParamByGroupAndParam(String groupName, String paramName) throws BaseException;
 
 }
