@@ -11,7 +11,7 @@
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="locations">
             <list>
-                <value>file:${user.home}/config/simplelab/cache.properties</value>
+                <value>test-cache.properties</value>
             </list>
         </property>
     </bean>

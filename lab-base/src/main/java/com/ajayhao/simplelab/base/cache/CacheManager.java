@@ -10,6 +10,12 @@ import java.util.Set;
  * Created by AjayHao on 2017/7/26.
  */
 public interface CacheManager {
+    /**
+     * 判断是否可用状态
+     *
+     * @return 是否可用
+     */
+    boolean isUsable();
 
     /**
      * 设置过期时间，seconds秒后超时

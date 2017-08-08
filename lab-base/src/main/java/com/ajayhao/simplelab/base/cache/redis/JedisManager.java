@@ -24,6 +24,7 @@ public class JedisManager implements CacheManager {
     private List<JedisShardInfo> jedisServerList;
     private ShardedJedisPool jedisPool;
     private final ReadWriteLock wrLock = new ReentrantReadWriteLock();
+    private boolean usable = false;
 
     public JedisManager() {}
 
@@ -34,6 +35,7 @@ public class JedisManager implements CacheManager {
             try {
                 if (this.jedisPool == null) {
                     jedisPool = new ShardedJedisPool(jedisPoolConfig, jedisServerList);
+                    checkUsableStatus();
                 }
             } finally {
                 wrLock.writeLock().unlock();
@@ -56,7 +58,7 @@ public class JedisManager implements CacheManager {
     }
 
     /**
-     * 从jedis连接池中获取获取jedis对象
+     * 从jedis连接池中获取jedis对象
      *
      * @return
      */
@@ -65,11 +67,24 @@ public class JedisManager implements CacheManager {
             return null;
         }
 
-        if (jedisPool == null) {
-            initialize();
-        }
-
         return jedisPool.getResource();
+    }
+
+    /**
+     * 尝试从jedis连接池中获取jedis对象
+     *
+     * @return
+     */
+    private void checkUsableStatus() {
+        if (jedisPool != null && jedisPool.isClosed()) {
+            this.usable = false;
+        }
+        try {
+            jedisPool.getResource();
+            this.usable = true;
+        }catch(Exception e){
+            this.usable = false;
+        }
     }
 
     /**
@@ -78,9 +93,10 @@ public class JedisManager implements CacheManager {
      * @param jedis
      */
     private void returnJedis(ShardedJedis jedis) {
-        if (jedisPool != null && !jedisPool.isClosed()) {
+        /*if (jedisPool != null && !jedisPool.isClosed()) {
             jedisPool.returnResource(jedis);
-        }
+        }*/
+        jedis.close();
     }
 
     public void setJedisPoolConfig(JedisPoolConfig jedisPoolConfig) {
@@ -105,9 +121,9 @@ public class JedisManager implements CacheManager {
             } finally {
                 returnJedis(jedis);
             }
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     @Override
@@ -349,4 +365,8 @@ public class JedisManager implements CacheManager {
         }
     }
 
+    @Override
+    public boolean isUsable() {
+        return usable;
+    }
 }

@@ -4,6 +4,7 @@ import com.ajayhao.simplelab.dal.InvestDAO;
 import com.ajayhao.simplelab.dal.LabDAO;
 import com.ajayhao.simplelab.dal.entity.InvestInfo;
 import com.ajayhao.simplelab.dal.entity.TestInfo;
+import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.testng.Assert;
@@ -37,7 +38,7 @@ public class InvestDAOTest extends DALTest{
     }
 
     @Test
-    @Rollback(false)
+    //@Rollback(false)
     @Parameters({"project1","mainchannel1","subchannel1","cost1","income1","begindate1","enddate1"})
     public void testInsertTestInfo(String projectName, String mainchannel, String subchannel, String cost, String income,
                                    String begindate, String enddate){

@@ -41,8 +41,8 @@ public class CommonParamServiceImpl implements CommonParamService {
                     throw new BaseException("参数配置表中groupName为{}的参数项未配置", groupName);
                 }
                 commonParamCache.initData(groupName, transferDtoList(paramList));
+                paramValue = commonParamCache.getByNameKey(groupName, paramCode);
             }
-            paramValue = commonParamCache.getByNameKey(groupName, paramCode);
             paramDTO =  new CommonParamDTO(groupName, paramCode, paramValue);
         }else{
             CommonParamDO paramDO = commonParamDAO.queryByGroupAndCode(groupName, paramCode);

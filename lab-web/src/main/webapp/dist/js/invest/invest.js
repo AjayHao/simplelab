@@ -53,7 +53,7 @@ var vueObj = new Vue({
                 },
                 "columns": [
                     { "data": "projectName" },
-                    { "data": "projectType" },
+                    { "data": "projectTypeDe" },
                     { "data": "mainChannel" },
                     { "data": "beginDate" },
                     { "data": "endDate" },

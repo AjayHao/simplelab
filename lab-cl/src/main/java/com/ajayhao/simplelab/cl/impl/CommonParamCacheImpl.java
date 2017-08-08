@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +23,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Created by AjayHao on 2017/8/7.
  */
 
-@Resource(name = "commonParamCache")
-public class CommonParamCacheImpl implements CommonParamCache{
+@Component("commonParamCache")
+public class CommonParamCacheImpl implements CommonParamCache {
 
     Logger logger = LoggerFactory.getLogger(CommonParamCacheImpl.class);
 
@@ -40,24 +40,27 @@ public class CommonParamCacheImpl implements CommonParamCache{
 
     @Override
     public boolean isGroupExist(String groupName) {
-        boolean retVal;
+        boolean retVal = false;
         lock.readLock().lock();
+
         try{
-            retVal = jedisManager.exists(groupName);
-        }catch(Exception e){
-            logger.warn("系统异常", e);
-            if(localFailOver){
-                logger.info("===切换到本地缓存");
-                Set<String> keySet = localMap.keySet();
-                retVal = !CollectionUtils.isEmpty(keySet) && keySet.contains(groupName);
-            }else{
-                throw e;
+            if(jedisManager.isUsable()){
+                retVal = jedisManager.exists(groupName);
+            }else if(localFailOver){
+                retVal = isGroupExistLocal(groupName);
             }
+        }catch(Exception e){
+            logger.warn("访问远程缓存失败", e);
         }finally {
             lock.readLock().unlock();
         }
 
         return retVal;
+    }
+
+    private boolean isGroupExistLocal(String groupName) {
+        Set<String> keySet = localMap.keySet();
+        return !CollectionUtils.isEmpty(keySet) && keySet.contains(groupName);
     }
 
     @Override
@@ -71,10 +74,9 @@ public class CommonParamCacheImpl implements CommonParamCache{
                 }
             }
             try {
-                result = jedisManager.setMap(groupName, map);
-            }catch(Exception e){
-                logger.warn("系统异常", e);
-                if(localFailOver){
+                if(jedisManager.isUsable()) {
+                    result = jedisManager.setMap(groupName, map);
+                }else if(localFailOver){
                     logger.info("===切换到本地缓存");
                     lock.writeLock().lock();
                     try{
@@ -87,9 +89,9 @@ public class CommonParamCacheImpl implements CommonParamCache{
                     }finally{
                         lock.writeLock().unlock();
                     }
-                }else{
-                    throw e;
                 }
+            }catch(Exception e){
+                logger.warn("访问远程缓存失败", e);
             }
         }
         return result;
@@ -101,15 +103,16 @@ public class CommonParamCacheImpl implements CommonParamCache{
         String retStr = null;
         Map<String, String> map = null;
         try {
-            map = jedisManager.getMap(groupName);
-            retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramCode);
-        }catch(Exception e){
-            logger.warn("系统异常", e);
-            if(localFailOver) {
+            if(jedisManager.isUsable()) {
+                map = jedisManager.getMap(groupName);
+            }else if(localFailOver) {
                 logger.info("===切换到本地缓存");
                 map = localMap.get(groupName);
-                retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramCode);
             }
+
+            retStr = CollectionUtils.isEmpty(map) ? null : map.get(paramCode);
+        }catch(Exception e){
+            logger.warn("访问远程缓存失败", e);
         }finally {
             lock.readLock().unlock();
         }
