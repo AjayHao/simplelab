@@ -1,10 +1,10 @@
 package com.ajayhao.simplelab.service.impl;
 
-import com.ajayhao.core.util.CoreDateUtils;
+
 import com.ajayhao.simplelab.dal.InvestDAO;
 import com.ajayhao.simplelab.dal.entity.InvestInfo;
-import com.ajayhao.simplelab.service.CommonParamService;
 import com.ajayhao.simplelab.service.InvestService;
+import com.ajayhao.simplelab.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +61,8 @@ public class InvestServiceImpl implements InvestService {
             return null;
 
         BigDecimal daysInterval =
-                new BigDecimal(CoreDateUtils.days(CoreDateUtils.parseToDate(beginDate, "yyyyMMdd"),
-                                    CoreDateUtils.parseToDate(endDate, "yyyyMMdd"))+1);
+                new BigDecimal(DateUtils.days(DateUtils.parseToDate(beginDate, "yyyyMMdd"),
+                                    DateUtils.parseToDate(endDate, "yyyyMMdd"))+1);
 
         BigDecimal b = income.divide(cost, 8, RoundingMode.HALF_DOWN);
         b = b.multiply(DAYS_OF_YEAR).multiply(ONE_HUNDRED).divide(daysInterval, 2 , BigDecimal.ROUND_HALF_DOWN);

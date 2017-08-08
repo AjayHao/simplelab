@@ -33,6 +33,7 @@ var vueObj = new Vue({
     el: '#app',
     data: {
         dataTable : null,
+        rowSel : null,
         sumCost : '',
         sumIncome : '',
         periods : ["1","2"]
@@ -125,7 +126,13 @@ var vueObj = new Vue({
                     });
                     self.dataTable.ajax.url(self.getUrlParam()).load();
                 }
-            )
+            );
+
+            $('#dataTable tbody').on('click', 'tr', function () {
+                self.dataTable.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+                self.rowSel = $(this);
+            } );
         },
         getUrlParam : function () {
             var paramArr = this.periods.reduce(function (a, b) {

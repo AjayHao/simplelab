@@ -28,7 +28,7 @@ public class JedisManager implements CacheManager {
 
     public JedisManager() {}
 
-    private void initialize() {
+    public void initialize() {
         notEmpty();
         if (this.jedisPool == null) {
             wrLock.writeLock().lock();
@@ -93,9 +93,6 @@ public class JedisManager implements CacheManager {
      * @param jedis
      */
     private void returnJedis(ShardedJedis jedis) {
-        /*if (jedisPool != null && !jedisPool.isClosed()) {
-            jedisPool.returnResource(jedis);
-        }*/
         jedis.close();
     }
 

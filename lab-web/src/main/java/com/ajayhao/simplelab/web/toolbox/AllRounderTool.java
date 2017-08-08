@@ -1,8 +1,8 @@
 package com.ajayhao.simplelab.web.toolbox;
 
-import com.ajayhao.core.enums.BizCode;
-import com.ajayhao.core.exception.BizException;
-import com.ajayhao.core.util.CoreObjectUtils;
+import com.ajayhao.simplelab.base.exception.BaseException;
+import com.ajayhao.simplelab.facade.enums.BizCode;
+import com.ajayhao.simplelab.util.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -43,7 +43,7 @@ public class AllRounderTool implements ApplicationContextAware {
                 result = method.invoke(beanInstance);
             }
         } catch (Exception e) {
-            throw new BizException(BizCode.Unknown, "调用方法"+beanName+"."+methodName+"报错:e="+e);
+             //throw new BaseException(BizCode.UNKNOWN, "调用方法"+beanName+"."+methodName+"报错:e="+e);
         }
 
         return result;
@@ -52,7 +52,7 @@ public class AllRounderTool implements ApplicationContextAware {
     private List<Object> prepareParamInstance(List<Class> methodParamClassList, String paramsJsonStr) {
         if (StringUtils.isNotEmpty(paramsJsonStr)) {
             List<Object> paramObjList = new ArrayList();
-            List<String> paramValList = CoreObjectUtils.json2Object(paramsJsonStr,List.class);
+            List<String> paramValList = ObjectUtils.fromJson(paramsJsonStr,List.class);
             if(methodParamClassList != null && methodParamClassList.size() == paramValList.size()) {
                 for (int i = 0; i < paramValList.size(); i++) {
                     String paramStrTmp = "";
@@ -60,22 +60,23 @@ public class AllRounderTool implements ApplicationContextAware {
                     if(paramValList.get(i) instanceof String){
                         paramStrTmp = (String) paramValList.get(i);
                     }else{
-                        paramStrTmp = CoreObjectUtils.object2Json( paramValList.get(i));
+                        paramStrTmp = ObjectUtils.toJson( paramValList.get(i));
                     }
                     if(methodParamClassList.get(i).isAssignableFrom(String.class)){
                         param = paramStrTmp;
                     }else {
-                        param = CoreObjectUtils.json2Object(paramStrTmp, methodParamClassList.get(i));
+                        param = ObjectUtils.fromJson(paramStrTmp, methodParamClassList.get(i));
                     }
                     paramObjList.add(param);
                 }
                 return paramObjList;
-            }else{
-                throw new BizException(BizCode.ParamError, "参数类型与参数个数不匹配");
-            }
+            }/*else{
+                throw new BaseException(BizCode.SYS_ERROR, "参数类型与参数个数不匹配");
+            }*/
         }else{
             return null;
         }
+        return null;
     }
 
     private Method prepareMethodInstance(String methodName, Class beanClass, List<Class> paramClassTypeList) {
@@ -87,20 +88,20 @@ public class AllRounderTool implements ApplicationContextAware {
                 method = beanClass.getMethod(methodName);
             }
         } catch (NoSuchMethodException e) {
-            throw new BizException(BizCode.ParamError, "待执行的方法不存在:" + methodName);
+            //throw new BizException(BizCode.ParamError, "待执行的方法不存在:" + methodName);
         }
         return method;
     }
 
     private List<Class> prepareParamTypeClassList(String paramTypeStr){
         if (StringUtils.isNotEmpty(paramTypeStr)) {
-            List<String> paramClassNameList = CoreObjectUtils.json2Object(paramTypeStr, List.class);
+            List<String> paramClassNameList = ObjectUtils.fromJson(paramTypeStr, List.class);
             List<Class> paramClassList = new ArrayList<>();
             for (String paramClassName : paramClassNameList) {
                 try {
                     paramClassList.add(Class.forName(paramClassName));
                 } catch (ClassNotFoundException e) {
-                    throw new BizException(BizCode.ParamError, "待执行的方法参数类型有误或不存在:" + paramClassName);
+                    //throw new BizException(BizCode.ParamError, "待执行的方法参数类型有误或不存在:" + paramClassName);
                 }
             }
             return paramClassList;
@@ -111,11 +112,11 @@ public class AllRounderTool implements ApplicationContextAware {
 
     private void paramValidate(String beanName) {
         if(StringUtils.isEmpty(beanName)){
-            throw new BizException(BizCode.ParamIsEmpty, "传入的beanName为空");
+            //throw new BizException(BizCode.ParamIsEmpty, "传入的beanName为空");
         }
 
         if(StringUtils.isEmpty(beanName)){
-            throw new BizException(BizCode.ParamIsEmpty, "传入的methodName为空");
+            //fthrow new BizException(BizCode.ParamIsEmpty, "传入的methodName为空");
         }
     }
 

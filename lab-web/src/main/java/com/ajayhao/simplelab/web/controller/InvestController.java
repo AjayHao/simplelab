@@ -1,6 +1,6 @@
 package com.ajayhao.simplelab.web.controller;
 
-import com.ajayhao.core.util.CoreDateUtils;
+
 import com.ajayhao.simplelab.base.exception.BaseException;
 import com.ajayhao.simplelab.dal.entity.InvestInfo;
 import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
@@ -9,6 +9,7 @@ import com.ajayhao.simplelab.facade.dto.response.InvestResponse;
 import com.ajayhao.simplelab.facade.enums.BizCode;
 import com.ajayhao.simplelab.service.CommonParamService;
 import com.ajayhao.simplelab.service.InvestService;
+import com.ajayhao.simplelab.util.DateUtils;
 import net.sf.cglib.beans.BeanCopier;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -102,7 +103,7 @@ public class InvestController {
             return "2";
         }else{
             Date now = new Date();
-            if(CoreDateUtils.days(now,CoreDateUtils.yyyymmdd(endDate)) > 0){
+            if(DateUtils.days(now, DateUtils.yyyymmdd(endDate)) > 0){
                 return "2";
             }else{
                 return "1";

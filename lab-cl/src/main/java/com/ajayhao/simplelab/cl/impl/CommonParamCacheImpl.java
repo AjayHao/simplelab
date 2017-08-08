@@ -1,6 +1,6 @@
 package com.ajayhao.simplelab.cl.impl;
 
-import com.ajayhao.simplelab.base.cache.redis.JedisManager;
+import com.ajayhao.simplelab.base.cache.CacheManager;
 import com.ajayhao.simplelab.cl.CommonParamCache;
 import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class CommonParamCacheImpl implements CommonParamCache {
     private boolean localFailOver;
 
     @Autowired
-    private JedisManager jedisManager;
+    private CacheManager jedisManager;
 
 
     private final ReadWriteLock lock = new ReentrantReadWriteLock();

@@ -8,7 +8,9 @@ import com.ajayhao.simplelab.facade.enums.AbstractBizCode;
 public enum BizCode implements AbstractBizCode {
     SUCCESS("0", "业务成功", "COMMON"),
     FAIL("1", "业务处理失败", "COMMON"),
-    SYS_ERROR("2", "系统异常", "COMMON");
+    INVALID_PARAM("2", "参数不合法", "COMMON"),
+    SYS_ERROR("98", "系统异常", "COMMON"),
+    UNKNOWN("99", "未知异常", "COMMON");
 
     private final String code;
     private final String message;

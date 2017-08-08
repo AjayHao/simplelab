@@ -1,8 +1,8 @@
 package com.ajayhao.simplelab.web.controller;
 
-import com.ajayhao.core.enums.BizCode;
-import com.ajayhao.core.util.CoreObjectUtils;
 import com.ajayhao.simplelab.facade.dto.common.BaseResponse;
+import com.ajayhao.simplelab.facade.enums.BizCode;
+import com.ajayhao.simplelab.util.ObjectUtils;
 import com.ajayhao.simplelab.web.toolbox.AllRounderTool;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +40,7 @@ public class HotFixController {
         BaseResponse response = new BaseResponse();
 
         if(StringUtils.isAnyEmpty(beanId,methodName)){
-            response.setRespCode(BizCode.ParamError.code());
+            response.setRespCode(BizCode.INVALID_PARAM.getCode());
             response.setRespMsg("执行失败:传入的beanId或方法名为空");
         }
 
@@ -55,15 +55,15 @@ public class HotFixController {
 
         try {
             Object result = allRounderTool.execute(beanId, methodName, paramTypeStr, paramJsonStr);
-            response.setRespCode(BizCode.Success.code());
+            response.setRespCode(BizCode.SUCCESS.getCode());
             response.setRespMsg("执行成功!");
             resultMap.put("返回值",result);
         }catch(Exception e){
-            response.setRespCode(BizCode.Unknown.code());
+            response.setRespCode(BizCode.UNKNOWN.getCode());
             response.setRespMsg("执行失败：e=" + ExceptionUtils.getStackTrace(e));
         }
 
         resultMap.put("请求返回",response);
-        return CoreObjectUtils.object2Json(resultMap);
+        return ObjectUtils.toJson(resultMap);
     }
 }

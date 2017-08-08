@@ -37,8 +37,6 @@
         <lab-remote.version>1.0.0-SNAPSHOT</lab-remote.version>
         <lab-web.version>1.0.0-SNAPSHOT</lab-web.version>
 
-        <core-common.version>1.0.0-SNAPSHOT</core-common.version>
-
     </properties>
 
 
@@ -90,12 +88,5 @@
 
     </dependencyManagement>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.ajayhao.core</groupId>
-            <artifactId>core-common</artifactId>
-            <version>${core-common.version}</version>
-        </dependency>
-    </dependencies>
 
 </project>

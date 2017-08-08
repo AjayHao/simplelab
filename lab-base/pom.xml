@@ -16,10 +16,6 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <properties>
-        <core-common.version>1.0.0-SNAPSHOT</core-common.version>
-    </properties>
-
     <dependencies>
 
         <dependency>
