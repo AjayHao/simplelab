@@ -1,7 +1,5 @@
 package com.ajayhao.simplelab.web.toolbox;
 
-import com.ajayhao.simplelab.base.exception.BaseException;
-import com.ajayhao.simplelab.facade.enums.BizCode;
 import com.ajayhao.simplelab.util.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
@@ -88,7 +86,7 @@ public class AllRounderTool implements ApplicationContextAware {
                 method = beanClass.getMethod(methodName);
             }
         } catch (NoSuchMethodException e) {
-            //throw new BizException(BizCode.ParamError, "待执行的方法不存在:" + methodName);
+            //throw new BaseException(BizCode.ParamError, "待执行的方法不存在:" + methodName);
         }
         return method;
     }
@@ -101,7 +99,7 @@ public class AllRounderTool implements ApplicationContextAware {
                 try {
                     paramClassList.add(Class.forName(paramClassName));
                 } catch (ClassNotFoundException e) {
-                    //throw new BizException(BizCode.ParamError, "待执行的方法参数类型有误或不存在:" + paramClassName);
+                    //throw new BaseException(BizCode.ParamError, "待执行的方法参数类型有误或不存在:" + paramClassName);
                 }
             }
             return paramClassList;
@@ -112,11 +110,11 @@ public class AllRounderTool implements ApplicationContextAware {
 
     private void paramValidate(String beanName) {
         if(StringUtils.isEmpty(beanName)){
-            //throw new BizException(BizCode.ParamIsEmpty, "传入的beanName为空");
+            //throw new BaseException(BizCode.ParamIsEmpty, "传入的beanName为空");
         }
 
         if(StringUtils.isEmpty(beanName)){
-            //fthrow new BizException(BizCode.ParamIsEmpty, "传入的methodName为空");
+            //fthrow new BaseException(BizCode.ParamIsEmpty, "传入的methodName为空");
         }
     }
 

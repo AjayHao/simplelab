@@ -10,9 +10,9 @@ import java.util.List;
 public interface InvestDAO {
     List<InvestInfoDO> queryInvestInfoList();
 
-    InvestInfoDO queryInvestInfo(String testId);
+    InvestInfoDO queryInvestInfo(String id);
 
     int insertInvestInfo(InvestInfoDO testInfo);
 
-    int deleteInvestInfo(InvestInfoDO investInfo);
+    int deleteInvestInfo(String id);
 }

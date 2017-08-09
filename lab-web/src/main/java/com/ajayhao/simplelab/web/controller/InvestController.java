@@ -1,17 +1,10 @@
 package com.ajayhao.simplelab.web.controller;
 
 
-import com.ajayhao.simplelab.base.exception.BaseException;
-import com.ajayhao.simplelab.dal.entity.InvestInfoDO;
-import com.ajayhao.simplelab.facade.dto.CommonParamDTO;
 import com.ajayhao.simplelab.facade.dto.InvestInfoDTO;
 import com.ajayhao.simplelab.facade.dto.response.InvestResponse;
 import com.ajayhao.simplelab.facade.enums.BizCode;
-import com.ajayhao.simplelab.service.CommonParamService;
 import com.ajayhao.simplelab.service.InvestService;
-import com.ajayhao.simplelab.util.DateUtils;
-import net.sf.cglib.beans.BeanCopier;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +43,13 @@ public class InvestController {
     @RequestMapping(path = "/{id}", method = {RequestMethod.GET})
     public InvestResponse getInvestInfoByIdPath(@PathVariable String id) {
         return getInvestResponse(id);
+    }
+
+    @RequestMapping(path = "/{id}", method = {RequestMethod.DELETE})
+    public InvestResponse deleteInvestInfoByIdPath(@PathVariable String id) {
+        InvestResponse response = new InvestResponse();
+        investService.removeInvestInfo(id);
+        return response;
     }
 
     /*url参数*/

@@ -9,6 +9,7 @@ import com.ajayhao.simplelab.facade.dto.InvestInfoDTO;
 import com.ajayhao.simplelab.service.CommonParamService;
 import com.ajayhao.simplelab.service.InvestService;
 import com.ajayhao.simplelab.util.DateUtils;
+import com.ajayhao.simplelab.util.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,12 @@ public class InvestServiceImpl implements InvestService {
     public void addInvestInfo(InvestInfoDTO investInfoDTO) {
         InvestInfoDO investInfoDO = new InvestInfoDO();
         fromOutCopier.copy(investInfoDTO, investInfoDO , null);
+        if (StringUtils.isEmpty(investInfoDO.getId())) {
+            investInfoDO.setId(SystemUtils.objectId());
+        }
         investDAO.insertInvestInfo(investInfoDO);
     }
+
 
     /*
     * 查询投资信息列表
@@ -130,10 +135,8 @@ public class InvestServiceImpl implements InvestService {
     * 删除投资信息
     * */
     @Override
-    public void removeInvestInfo(InvestInfoDTO investInfoDTO) {
-        InvestInfoDO investInfoDO = new InvestInfoDO();
-        fromOutCopier.copy(investInfoDTO, investInfoDO , null);
-        investDAO.insertInvestInfo(investInfoDO);
+    public void removeInvestInfo(String id) {
+        investDAO.deleteInvestInfo(id);
     }
 
 

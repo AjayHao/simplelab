@@ -32,11 +32,36 @@ $.extend( true, $.fn.dataTable.defaults, {
 var vueObj = new Vue({
     el: '#app',
     data: {
+        COLUMN_META : [
+            { "data": "projectName" },
+            { "data": "projectType" },
+            { "data": "projectTypeDe" },
+            { "data": "mainChannel" },
+            { "data": "mainChannelDe" },
+            { "data": "subChannel" },
+            { "data": "subChannelDe" },
+            { "data": "beginDate" },
+            { "data": "endDate" },
+            { "data": "cost" ,
+                "className" : "text-right",
+                "render" : $.fn.dataTable.render.number( ',', '.', 2, '￥' )
+            },
+            { "data": "income",
+                "className" : "text-right",
+                "render" : $.fn.dataTable.render.number( ',', '.', 2, '￥' )
+            },
+            { "data": "annualYield" ,
+                "className" : "text-right",
+                "render" : $.fn.dataTable.render.number( ',', '.', 2, '', '%')
+            }
+        ],
         dataTable : null,
         rowSel : null,
         sumCost : '',
         sumIncome : '',
-        periods : ["1","2"]
+        periods : ["1","2"],
+        confirmMsg : '',
+        operType : ''
     },
     //created: created,
     mounted: function(){
@@ -48,33 +73,17 @@ var vueObj = new Vue({
 
             this.dataTable = $('#dataTable').DataTable({
                 //"dom" :  '<"top"f><rt><"bottom"ip>',
+                "select" : {
+                    "items" : "row",
+                    "style" : "single",
+                    "blurable" : true,
+                    "info" : false
+                },
                 "ajax": {
                     "url": self.getUrlParam(),
                     "dataSrc": "investDTOs"
                 },
-                "columns": [
-                    { "data": "projectName" },
-                    { "data": "projectType" },
-                    { "data": "projectTypeDe" },
-                    { "data": "mainChannel" },
-                    { "data": "mainChannelDe" },
-                    { "data": "subChannel" },
-                    { "data": "subChannelDe" },
-                    { "data": "beginDate" },
-                    { "data": "endDate" },
-                    { "data": "cost" ,
-                        "className" : "text-right",
-                        "render" : $.fn.dataTable.render.number( ',', '.', 2, '￥' )
-                    },
-                    { "data": "income",
-                        "className" : "text-right",
-                        "render" : $.fn.dataTable.render.number( ',', '.', 2, '￥' )
-                    },
-                    { "data": "annualYield" ,
-                        "className" : "text-right",
-                        "render" : $.fn.dataTable.render.number( ',', '.', 2, '', '%')
-                    }
-                ],
+                "columns": self.COLUMN_META,
                 "columnDefs": [
                     {
                         "render": function ( data, type, row ) {
@@ -114,9 +123,9 @@ var vueObj = new Vue({
                 },
             });
 
-            $("#button-area").html('<p><button type="button" class="btn btn-primary">新增</button>'+
-            '<button type="button" class="btn btn-success">修改</button>'+
-            '<button type="button" class="btn btn-danger">删除</button></p>');
+            $("#button-area").html('<p><button id="btnAdd" type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">新增</button>'+
+            '<button id="btnEdit" type="button" class="btn btn-success" data-toggle="modal" disabled="disabled" data-target="#confirmModal">修改</button>'+
+            '<button id="btnRemove" type="button" class="btn btn-danger" data-toggle="modal" disabled="disabled" data-target="#confirmModal">删除</button></p>');
 
             $("#expire-tag").html('<label class="checkbox-inline">' +
                 '<input name="periods" type="checkbox" value="1" checked>往期</label>' +
@@ -132,11 +141,18 @@ var vueObj = new Vue({
                 }
             );
 
-            $('#dataTable tbody').on('click', 'tr', function () {
-                self.dataTable.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-                self.rowSel = $(this);
-            } );
+            this.dataTable.on( 'select', function ( e, dt, type, indexes ) {
+                var $rowObj = self.dataTable.rows( indexes ).data();
+                self.rowSel = self.getRowSelObject($rowObj);
+                $("#btnEdit").removeAttr("disabled");
+                $("#btnRemove").removeAttr("disabled");
+            }).on('deselect', function () {
+                self.rowSel = null;
+                $("#btnEdit").attr("disabled","disabled");
+                $("#btnRemove").attr("disabled","disabled");
+            });
+
+            this.bindBtnEvents();
         },
         getUrlParam : function () {
             var paramArr = this.periods.reduce(function (a, b) {
@@ -144,6 +160,33 @@ var vueObj = new Vue({
             }, '' );
 
             return basePath+"/invest/list?periods="+paramArr;
+        },
+        getRowSelObject : function(rowData) {
+            var columnName;
+            for(col in this.COLUMN_META){
+                columnName = this.COLUMN_META[col].data;
+                this.rowSel = this.rowSel || {};
+                this.rowSel[columnName] = rowData.pluck(columnName)[0] || '';
+            }
+        },
+        bindBtnEvents : function() {
+            var self = this;
+            $("#btnAdd").on('click',function(){
+                self.operType = 'add';
+                self.confirmMsg = '是否确认提交';
+            });
+            $("#btnEdit").on('click',function(){
+                self.operType = 'edit';
+                self.confirmMsg = '是否确认提交';
+            });
+            $("#btnRemove").on('click',function(){
+                self.operType = 'remove';
+                self.confirmMsg = '是否确认删除该条记录';
+            });
+
+        },
+        submit : function(){
+            alert(this.operType);
         }
     }
 });

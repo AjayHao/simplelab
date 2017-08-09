@@ -27,7 +27,7 @@ public interface InvestService {
     BigDecimal calculateAnnualYield(InvestInfoDTO investInfoDTO);
 
     /*
-        * 删除投资信息
-        * */
-    void removeInvestInfo(InvestInfoDTO investInfoDTO);
+    * 删除投资信息
+    * */
+    void removeInvestInfo(String id);
 }

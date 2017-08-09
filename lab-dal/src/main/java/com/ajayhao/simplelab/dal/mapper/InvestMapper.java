@@ -14,7 +14,7 @@ public interface InvestMapper {
 
     int insertInvestInfo(InvestInfoDO investInfo);
 
-    int deleteInvestInfo(InvestInfoDO investInfo);
+    int deleteInvestInfo(@Param("id") String id);
 
     InvestInfoDO queryInvestInfo(@Param("id") String id);
 }

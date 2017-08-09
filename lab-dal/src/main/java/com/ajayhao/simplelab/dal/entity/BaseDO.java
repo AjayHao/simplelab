@@ -19,7 +19,7 @@ public class BaseDO implements Serializable{
     /**
      *  表物理主键
      */
-    private Long id;
+    private String id;
 
     /**
      *  创建人id
@@ -48,7 +48,7 @@ public class BaseDO implements Serializable{
      *
      * @return the id
      */
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -57,7 +57,7 @@ public class BaseDO implements Serializable{
      *
      * @param id the id
      */
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

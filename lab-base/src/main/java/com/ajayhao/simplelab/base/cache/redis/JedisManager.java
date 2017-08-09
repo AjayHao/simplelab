@@ -1,6 +1,8 @@
 package com.ajayhao.simplelab.base.cache.redis;
 
 import com.ajayhao.simplelab.base.cache.CacheManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.ShardedJedis;
@@ -19,6 +21,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Created by AjayHao on 2017/8/6.
  */
 public class JedisManager implements CacheManager {
+
+    private final static Logger LOG = LoggerFactory.getLogger(JedisManager.class);
 
     private JedisPoolConfig jedisPoolConfig;
     private List<JedisShardInfo> jedisServerList;
@@ -83,6 +87,7 @@ public class JedisManager implements CacheManager {
             jedisPool.getResource();
             this.usable = true;
         }catch(Exception e){
+            LOG.warn("===>检查缓存状态为不可用");
             this.usable = false;
         }
     }

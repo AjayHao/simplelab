@@ -5,7 +5,7 @@
 <mapper namespace="com.ajayhao.simplelab.dal.mapper.InvestMapper">
 
     <resultMap id="RM-INVEST-INFO" type="com.ajayhao.simplelab.dal.entity.InvestInfoDO">
-        <result property="id" column="id" javaType="long" jdbcType="BIGINT"/>
+        <result property="id" column="id" />
         <result property="projectName" column="project_name" />
         <result property="projectType" column="project_type" />
         <result property="mainChannel" column="main_channel" />
@@ -114,4 +114,10 @@
             now(),
         </trim>
     </insert>
+
+    <delete id="deleteInvestInfo">
+        delete from invest_info
+         where id = #{id}
+    </delete>
+
 </mapper>

@@ -1,6 +1,6 @@
 -- 投资信息表
 CREATE TABLE `invest_info` (
-  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `project_name` varchar(100) DEFAULT NULL COMMENT '投资项目',
   `project_type` varchar(6) DEFAULT NULL COMMENT '项目类型',
   `main_channel` varchar(6) DEFAULT NULL COMMENT '主渠道',
@@ -18,7 +18,7 @@ CREATE TABLE `invest_info` (
 
 -- 公共参数表
 CREATE TABLE `common_params` (
-  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `param_group` varchar(30) NOT NULL COMMENT '参数组',
   `param_code` varchar(30) NOT NULL COMMENT '参数代码',
   `param_value` varchar(100) DEFAULT NULL COMMENT '参数值',
