@@ -1,6 +1,6 @@
 package com.ajayhao.simplelab.dal.mapper;
 
-import com.ajayhao.simplelab.dal.entity.InvestInfo;
+import com.ajayhao.simplelab.dal.entity.InvestInfoDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,9 +10,11 @@ import java.util.List;
  */
 public interface InvestMapper {
 
-    List<InvestInfo> queryInvestInfoList();
+    List<InvestInfoDO> queryInvestInfoList();
 
-    int insertInvestInfo(InvestInfo investInfo);
+    int insertInvestInfo(InvestInfoDO investInfo);
 
-    InvestInfo queryInvestInfo(@Param("id") String id);
+    int deleteInvestInfo(InvestInfoDO investInfo);
+
+    InvestInfoDO queryInvestInfo(@Param("id") String id);
 }

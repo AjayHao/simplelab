@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
  * Created by AjayHao on 2017/7/13.
  */
-public class InvestDTO extends BaseDTO implements Serializable{
+public class InvestInfoDTO extends BaseDTO implements Serializable{
 
     private static final long serialVersionUID = 3095414893084475849L;
 

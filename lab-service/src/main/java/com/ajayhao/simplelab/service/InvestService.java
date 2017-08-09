@@ -1,6 +1,7 @@
 package com.ajayhao.simplelab.service;
 
-import com.ajayhao.simplelab.dal.entity.InvestInfo;
+import com.ajayhao.simplelab.dal.entity.InvestInfoDO;
+import com.ajayhao.simplelab.facade.dto.InvestInfoDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,11 +11,23 @@ import java.util.List;
  */
 public interface InvestService {
 
-    void addInvestInfo(InvestInfo investInfo);
+    void addInvestInfo(InvestInfoDTO investDto);
 
-    List<InvestInfo> queryInvestInfoList();
+    /*
+    * 查询投资信息列表
+    * */
+    List<InvestInfoDTO> queryInvestInfoList(String[] periods);
 
-    InvestInfo queryInvestInfo(String id);
+    InvestInfoDTO queryInvestInfo(String id);
 
-    BigDecimal calculateAnnualYield(InvestInfo investInfo);
+
+    /*
+    * 计算年化收益率
+    * */
+    BigDecimal calculateAnnualYield(InvestInfoDTO investInfoDTO);
+
+    /*
+        * 删除投资信息
+        * */
+    void removeInvestInfo(InvestInfoDTO investInfoDTO);
 }

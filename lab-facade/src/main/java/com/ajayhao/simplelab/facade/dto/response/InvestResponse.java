@@ -1,6 +1,6 @@
 package com.ajayhao.simplelab.facade.dto.response;
 
-import com.ajayhao.simplelab.facade.dto.InvestDTO;
+import com.ajayhao.simplelab.facade.dto.InvestInfoDTO;
 import com.ajayhao.simplelab.facade.dto.common.BaseResponse;
 
 import java.util.List;
@@ -12,15 +12,19 @@ import java.util.List;
 
 public class InvestResponse extends BaseResponse {
 
+    public InvestResponse(){
+        super();
+    }
+
     private static final long serialVersionUID = -866530435174294000L;
 
-    private List<InvestDTO> investDTOs;
+    private List<InvestInfoDTO> investDTOs;
 
-    public List<InvestDTO> getInvestDTOs() {
+    public List<InvestInfoDTO> getInvestDTOs() {
         return investDTOs;
     }
 
-    public void setInvestDTOs(List<InvestDTO> investDTOs) {
+    public void setInvestDTOs(List<InvestInfoDTO> investDTOs) {
         this.investDTOs = investDTOs;
     }
 }

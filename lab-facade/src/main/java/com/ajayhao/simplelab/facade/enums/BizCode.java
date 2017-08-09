@@ -6,7 +6,7 @@ import com.ajayhao.simplelab.facade.enums.AbstractBizCode;
  * Created by AjayHao on 2017/7/25.
  */
 public enum BizCode implements AbstractBizCode {
-    SUCCESS("0", "业务成功", "COMMON"),
+    SUCCESS("0", "业务处理成功", "COMMON"),
     FAIL("1", "业务处理失败", "COMMON"),
     INVALID_PARAM("2", "参数不合法", "COMMON"),
     SYS_ERROR("98", "系统异常", "COMMON"),

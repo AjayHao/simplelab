@@ -1,6 +1,6 @@
 package com.ajayhao.simplelab.dal;
 
-import com.ajayhao.simplelab.dal.entity.InvestInfo;
+import com.ajayhao.simplelab.dal.entity.InvestInfoDO;
 
 import java.util.List;
 
@@ -8,9 +8,11 @@ import java.util.List;
  * Created by AjayHao on 2017/7/13.
  */
 public interface InvestDAO {
-    List<InvestInfo> queryInvestInfoList();
+    List<InvestInfoDO> queryInvestInfoList();
 
-    InvestInfo queryInvestInfo(String testId);
+    InvestInfoDO queryInvestInfo(String testId);
 
-    int insertInvestInfo(InvestInfo testInfo);
+    int insertInvestInfo(InvestInfoDO testInfo);
+
+    int deleteInvestInfo(InvestInfoDO investInfo);
 }
