@@ -57,6 +57,10 @@ var vueObj = new Vue({
         ],
         dataTable : null,
         rowSel : null,
+        appForm : {
+            productType : '',
+            productName : ''
+        },
         sumCost : '',
         sumIncome : '',
         periods : ["1","2"],
@@ -123,8 +127,8 @@ var vueObj = new Vue({
                 },
             });
 
-            $("#button-area").html('<p><button id="btnAdd" type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">新增</button>'+
-            '<button id="btnEdit" type="button" class="btn btn-success" data-toggle="modal" disabled="disabled" data-target="#confirmModal">修改</button>'+
+            $("#button-area").html('<p><button id="btnAdd" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">新增</button>'+
+            '<button id="btnEdit" type="button" class="btn btn-success" data-toggle="modal" disabled="disabled" data-target="#formModal">修改</button>'+
             '<button id="btnRemove" type="button" class="btn btn-danger" data-toggle="modal" disabled="disabled" data-target="#confirmModal">删除</button></p>');
 
             $("#expire-tag").html('<label class="checkbox-inline">' +
@@ -143,7 +147,11 @@ var vueObj = new Vue({
 
             this.dataTable.on( 'select', function ( e, dt, type, indexes ) {
                 var $rowObj = self.dataTable.rows( indexes ).data();
-                self.rowSel = self.getRowSelObject($rowObj);
+                self.getRowSelObject($rowObj);
+
+                self.appForm.productType = self.rowSel.productType;
+                self.appForm.productName = self.rowSel.productName;
+
                 $("#btnEdit").removeAttr("disabled");
                 $("#btnRemove").removeAttr("disabled");
             }).on('deselect', function () {
