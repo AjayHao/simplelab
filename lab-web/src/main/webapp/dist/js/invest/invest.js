@@ -54,8 +54,12 @@ var vueObj = new Vue({
                 },
                 "columns": [
                     { "data": "projectName" },
+                    { "data": "projectType" },
                     { "data": "projectTypeDe" },
                     { "data": "mainChannel" },
+                    { "data": "mainChannelDe" },
+                    { "data": "subChannel" },
+                    { "data": "subChannelDe" },
                     { "data": "beginDate" },
                     { "data": "endDate" },
                     { "data": "cost" ,
@@ -74,35 +78,35 @@ var vueObj = new Vue({
                 "columnDefs": [
                     {
                         "render": function ( data, type, row ) {
-                            return data +' ('+ row['mainChannel']+')';
+                            return data +' ('+ row['subChannelDe']+')';
                         },
                         "targets": 0
                     },
-                    { "visible": false,  "targets": [2] }
+                    { "visible": false,  "targets": [1,3,4,5,6] }
                 ],
                 "footerCallback": function ( row, data, start, end, display ) {
                     var api = this.api();
                     // Total over all pages
-                    var totalCost = api.column(5).data().reduce( function (a, b) {
+                    var totalCost = api.column(9).data().reduce( function (a, b) {
                         return toNumber(a) + toNumber(b);
                     }, 0 );
-                    var pageTotalCost = api.column(5, { page: 'current'} ).data().reduce( function (a, b) {
+                    var pageTotalCost = api.column(9, { page: 'current'} ).data().reduce( function (a, b) {
                         return toNumber(a) + toNumber(b);
                     }, 0 );
-                    var totalIncome = api.column(6).data().reduce( function (a, b) {
+                    var totalIncome = api.column(10).data().reduce( function (a, b) {
                         return toNumber(a) + toNumber(b);
                     }, 0 );
-                    var pageTotalIncome = api.column(6, { page: 'current'} ).data().reduce( function (a, b) {
+                    var pageTotalIncome = api.column(10, { page: 'current'} ).data().reduce( function (a, b) {
                         return toNumber(a) + toNumber(b);
                     }, 0 );
 
                     // Update footer
-                    $(api.column(5).footer() ).html(
+                    $(api.column(9).footer() ).html(
                         $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display(pageTotalCost) +
                             '</br>总共('+ $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display( totalCost) +')'
                     );
 
-                    $(api.column(6).footer() ).html(
+                    $(api.column(10).footer() ).html(
                         $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display(pageTotalIncome) +
                         '</br>总共('+ $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display( totalIncome) +')'
                     );

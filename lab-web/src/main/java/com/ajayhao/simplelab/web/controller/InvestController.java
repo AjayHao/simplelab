@@ -56,8 +56,12 @@ public class InvestController {
                 investDTO.setAnnualYield(investService.calculateAnnualYield(investInfo));
                 toOutCopier.copy(investInfo, investDTO, null);
                 try {
-                    CommonParamDTO paramDTO = commonParamService.getParamByGroupAndCode("PROJECT_TYPE",investDTO.getProjectType());
-                    investDTO.setProjectTypeDe(paramDTO.getParamValue());
+                    CommonParamDTO projectTypeDic = commonParamService.getParamByGroupAndCode("PROJECT_TYPE",investDTO.getProjectType());
+                    CommonParamDTO mainChannelDic = commonParamService.getParamByGroupAndCode("MAIN_CHANNEL",investDTO.getMainChannel());
+                    CommonParamDTO subChannelDic = commonParamService.getParamByGroupAndCode("SUB_CHANNEL",investDTO.getSubChannel());
+                    investDTO.setProjectTypeDe(projectTypeDic.getParamValue());
+                    investDTO.setMainChannelDe(mainChannelDic.getParamValue());
+                    investDTO.setSubChannelDe(subChannelDic.getParamValue());
                 } catch (BaseException e) {
                     e.printStackTrace();
                 }

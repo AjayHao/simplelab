@@ -17,7 +17,9 @@ public class InvestDTO extends BaseDTO implements Serializable{
     private String projectType;
     private String projectTypeDe;
     private String mainChannel;
+    private String mainChannelDe;
     private String subChannel;
+    private String subChannelDe;
     private BigDecimal cost;
     private BigDecimal income;
     private String beginDate;
@@ -62,6 +64,22 @@ public class InvestDTO extends BaseDTO implements Serializable{
 
     public void setSubChannel(String subChannel) {
         this.subChannel = subChannel;
+    }
+
+    public String getMainChannelDe() {
+        return mainChannelDe;
+    }
+
+    public void setMainChannelDe(String mainChannelDe) {
+        this.mainChannelDe = mainChannelDe;
+    }
+
+    public String getSubChannelDe() {
+        return subChannelDe;
+    }
+
+    public void setSubChannelDe(String subChannelDe) {
+        this.subChannelDe = subChannelDe;
     }
 
     public BigDecimal getCost() {

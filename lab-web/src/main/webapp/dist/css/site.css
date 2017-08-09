@@ -6,6 +6,6 @@
     margin-right: 5px;
 }
 
-tr.selected {
+table.dataTable tbody tr.selected, table.dataTable.display tbody tr.selected {
     background-color: #a9b7d1;
 }

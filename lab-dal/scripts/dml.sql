@@ -21,7 +21,8 @@ INSERT INTO `springlab`.`common_params` (`param_group`, `param_code`, `param_val
 INSERT INTO `springlab`.`common_params` (`param_group`, `param_code`, `param_value`, `param_desc`, `creator_id`, `create_tm`, `modifier_id`, `modify_tm`) VALUES ('SUB_CHANNEL', 'QS001', '东方证券', '子渠道-东方', 'sys', now(), 'sys', now());
 
 
-/* 历史记录 */INSERT INTO `springlab`.`invest_info` (`project_name`, `project_type`, `main_channel`, `sub_channel`, `cost`, `income`, `begin_date`, `end_date`, `creator_id`, `create_tm`, `modifier_id`, `modify_tm`) VALUES ('中海货币', 'PT005', 'MC001', 'YH001', '50000.00', NULL, NULL, NULL, 'sys', now(), 'sys', now());
+/* 历史记录 */
+INSERT INTO `springlab`.`invest_info` (`project_name`, `project_type`, `main_channel`, `sub_channel`, `cost`, `income`, `begin_date`, `end_date`, `creator_id`, `create_tm`, `modifier_id`, `modify_tm`) VALUES ('中海货币', 'PT005', 'MC001', 'YH001', '50000.00', NULL, NULL, NULL, 'sys', now(), 'sys', now());
 INSERT INTO `springlab`.`invest_info` (`project_name`, `project_type`, `main_channel`, `sub_channel`, `cost`, `income`, `begin_date`, `end_date`, `creator_id`, `create_tm`, `modifier_id`, `modify_tm`) VALUES ('定期存款', 'PT004', 'MC001', 'YH001', '34000.00', NULL, NULL, NULL,'sys', now(), 'sys', now());
 INSERT INTO `springlab`.`invest_info` (`project_name`, `project_type`, `main_channel`, `sub_channel`, `cost`, `income`, `begin_date`, `end_date`, `creator_id`, `create_tm`, `modifier_id`, `modify_tm`) VALUES ('活期存款', 'PT003', 'MC001', 'YH001', '28000.00', NULL, NULL, NULL, 'sys', now(), 'sys', now());
 INSERT INTO `springlab`.`invest_info` (`project_name`, `project_type`, `main_channel`, `sub_channel`, `cost`, `income`, `begin_date`, `end_date`, `creator_id`, `create_tm`, `modifier_id`, `modify_tm`) VALUES ('2017年渤盛161号', 'PT002', 'MC001', 'YH002', '100000.00', NULL, '20170228', '20170804', 'sys', now(), 'sys', now());

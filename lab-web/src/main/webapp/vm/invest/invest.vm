@@ -8,7 +8,7 @@
 <div id="app">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">投资信息</h1>
+            <!-- h1 class="page-header">投资信息</h1>-->
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -26,7 +26,11 @@
                             <tr>
                                 <th>项目名称</th>
                                 <th>项目类型</th>
-                                <th>投资渠道</th>
+                                <th>项目类型描述</th>
+                                <th>主渠道</th>
+                                <th>主渠道描述</th>
+                                <th>子渠道</th>
+                                <th>子渠道描述</th>
                                 <th>起投日</th>
                                 <th>到期日</th>
                                 <th>投资金额</th>
@@ -36,7 +40,7 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th colspan="5">合计</th>
+                                <th colspan="9">合计</th>
                                 <th></th>
                                 <th></th>
                                 <th> - </th>
