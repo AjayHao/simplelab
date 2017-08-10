@@ -13,5 +13,7 @@ public interface CommonParamCache{
 
     long initData(String groupName, List<CommonParamDTO> paramList);
 
-    String getByNameKey(String groupName, String paramCode);
+    String getValueByGroupAndName(String groupName, String paramCode);
+
+    List<CommonParamDTO> getParamGroup(String groupName);
 }

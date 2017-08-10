@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -98,7 +95,7 @@ public class CommonParamCacheImpl implements CommonParamCache {
     }
 
     @Override
-    public String getByNameKey(String groupName, String paramCode) {
+    public String getValueByGroupAndName(String groupName, String paramCode) {
         lock.readLock().lock();
         String retStr = null;
         Map<String, String> map = null;
@@ -118,5 +115,39 @@ public class CommonParamCacheImpl implements CommonParamCache {
         }
 
         return retStr;
+    }
+
+
+    @Override
+    public List<CommonParamDTO> getParamGroup(String groupName) {
+        Map<String, String> map = null;
+        List<CommonParamDTO> list = new ArrayList<CommonParamDTO>();
+        lock.readLock().lock();
+        try {
+            if(jedisManager.isUsable()) {
+                map = jedisManager.getMap(groupName);
+            }else if(localFailOver) {
+                logger.info("===切换到本地缓存");
+                map = localMap.get(groupName);
+            }
+
+            if(CollectionUtils.isEmpty(map)){
+                return list;
+            }else{
+                for(Map.Entry<String,String> entry : map.entrySet()){
+                    CommonParamDTO paramDTO = new CommonParamDTO();
+                    paramDTO.setParamGroup(groupName);
+                    paramDTO.setParamCode(entry.getKey());
+                    paramDTO.setParamValue(entry.getValue());
+                    list.add(paramDTO);
+                }
+            }
+        }catch(Exception e){
+            logger.warn("访问远程缓存失败", e);
+        }finally {
+            lock.readLock().unlock();
+        }
+
+        return list;
     }
 }

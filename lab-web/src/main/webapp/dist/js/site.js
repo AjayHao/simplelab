@@ -53,4 +53,3 @@ function toNumber(i) {
         typeof i === 'number' ?
             i : 0;
 };
-

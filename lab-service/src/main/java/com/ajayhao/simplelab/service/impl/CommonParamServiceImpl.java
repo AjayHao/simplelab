@@ -31,17 +31,38 @@ public class CommonParamServiceImpl implements CommonParamService {
     private CommonParamCache commonParamCache;
 
     @Override
+    public List<CommonParamDTO> getParamsByGroup(String groupName) throws BaseException {
+        List<CommonParamDTO> paramDTOs = null;
+        List<CommonParamDO> paramDOs = null;
+        if(cacheEnabled){
+            paramDTOs = commonParamCache.getParamGroup(groupName);
+            if(CollectionUtils.isEmpty(paramDTOs)){
+                List<CommonParamDO> paramList = commonParamDAO.queryByGroup(groupName);
+                if(CollectionUtils.isEmpty(paramList)){
+                    throw new BaseException("参数配置表中groupName为{}的参数项未配置", groupName);
+                }
+                commonParamCache.initData(groupName, transferDtoList(paramList));
+                paramDTOs = commonParamCache.getParamGroup(groupName);
+            }
+        }else{
+            paramDOs = commonParamDAO.queryByGroup(groupName);
+            paramDTOs = transferDtoList(paramDOs);
+        }
+        return paramDTOs;
+    }
+
+    @Override
     public CommonParamDTO getParamByGroupAndCode(String groupName, String paramCode) throws BaseException {
         CommonParamDTO paramDTO = null;
         if(cacheEnabled){
-            String paramValue = commonParamCache.getByNameKey(groupName, paramCode);
+            String paramValue = commonParamCache.getValueByGroupAndName(groupName, paramCode);
             if(StringUtils.isBlank(paramValue)){
                 List<CommonParamDO> paramList = commonParamDAO.queryByGroup(groupName);
                 if(CollectionUtils.isEmpty(paramList)){
                     throw new BaseException("参数配置表中groupName为{}的参数项未配置", groupName);
                 }
                 commonParamCache.initData(groupName, transferDtoList(paramList));
-                paramValue = commonParamCache.getByNameKey(groupName, paramCode);
+                paramValue = commonParamCache.getValueByGroupAndName(groupName, paramCode);
             }
             paramDTO =  new CommonParamDTO(groupName, paramCode, paramValue);
         }else{

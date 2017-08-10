@@ -27,4 +27,9 @@ public class IndexController {
     public String investInfoPage(HttpServletRequest request) throws Exception {
         return "/invest/invest";
     }
+
+    @RequestMapping(path="bootstrap/forms", method = RequestMethod.GET)
+    public String formsPage(HttpServletRequest request) throws Exception {
+        return "/bootstrap/forms";
+    }
 }

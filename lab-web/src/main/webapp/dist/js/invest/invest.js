@@ -28,11 +28,11 @@ $.extend( true, $.fn.dataTable.defaults, {
     },
 } );
 
-
 var vueObj = new Vue({
     el: '#app',
     data: {
         COLUMN_META : [
+            { "data": "id" },
             { "data": "projectName" },
             { "data": "projectType" },
             { "data": "projectTypeDe" },
@@ -65,9 +65,28 @@ var vueObj = new Vue({
         sumIncome : '',
         periods : ["1","2"],
         confirmMsg : '',
-        operType : ''
+        operType : '',
+        /*projectTypes : [
+            {"paramCode" : "1","paramValue" : "哈哈"}
+        ]*/
+        projectType : '',
+        select : {
+            options: [
+                {val: 0, label: 'Cat'},
+                {val: 1, label: 'Cow'},
+                {val: 2, label: 'Dog'},
+                {val: 3, label: 'Elephant'},
+                {val: 4, label: 'Fish'},
+                {val: 5, label: 'Lion'},
+                {val: 6, label: 'Tiger'},
+                {val: 7, label: 'Turtle'}
+            ],
+            value : 1
+        }
     },
-    //created: created,
+    created: function(){
+
+    },
     mounted: function(){
         this.initRecordTable();
     },
@@ -95,31 +114,31 @@ var vueObj = new Vue({
                         },
                         "targets": 0
                     },
-                    { "visible": false,  "targets": [1,3,4,5,6] }
+                    { "visible": false,  "targets": [0,2,3,4,5,6] }
                 ],
                 "footerCallback": function ( row, data, start, end, display ) {
                     var api = this.api();
                     // Total over all pages
-                    var totalCost = api.column(9).data().reduce( function (a, b) {
+                    var totalCost = api.column(10).data().reduce( function (a, b) {
                         return toNumber(a) + toNumber(b);
                     }, 0 );
-                    var pageTotalCost = api.column(9, { page: 'current'} ).data().reduce( function (a, b) {
+                    var pageTotalCost = api.column(10, { page: 'current'} ).data().reduce( function (a, b) {
                         return toNumber(a) + toNumber(b);
                     }, 0 );
-                    var totalIncome = api.column(10).data().reduce( function (a, b) {
+                    var totalIncome = api.column(11).data().reduce( function (a, b) {
                         return toNumber(a) + toNumber(b);
                     }, 0 );
-                    var pageTotalIncome = api.column(10, { page: 'current'} ).data().reduce( function (a, b) {
+                    var pageTotalIncome = api.column(11, { page: 'current'} ).data().reduce( function (a, b) {
                         return toNumber(a) + toNumber(b);
                     }, 0 );
 
                     // Update footer
-                    $(api.column(9).footer() ).html(
+                    $(api.column(10).footer() ).html(
                         $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display(pageTotalCost) +
                             '</br>总共('+ $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display( totalCost) +')'
                     );
 
-                    $(api.column(10).footer() ).html(
+                    $(api.column(11).footer() ).html(
                         $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display(pageTotalIncome) +
                         '</br>总共('+ $.fn.dataTable.render.number( ',', '.', 2, '￥' ).display( totalIncome) +')'
                     );
@@ -127,9 +146,12 @@ var vueObj = new Vue({
                 },
             });
 
-            $("#button-area").html('<p><button id="btnAdd" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">新增</button>'+
-            '<button id="btnEdit" type="button" class="btn btn-success" data-toggle="modal" disabled="disabled" data-target="#formModal">修改</button>'+
-            '<button id="btnRemove" type="button" class="btn btn-danger" data-toggle="modal" disabled="disabled" data-target="#confirmModal">删除</button></p>');
+            $("#button-area").html('<p><button id="btnAdd" type="button" class="btn btn-primary "'+
+                                        'data-toggle="modal" data-target="#formModal">新增</button>'+
+                                        '<button id="btnEdit" type="button" class="btn btn-success" '+
+                                        'data-toggle="modal" disabled="disabled" data-target="#formModal">修改</button>'+
+                                        '<button id="btnRemove" type="button" class="btn btn-danger" '+
+                                        'data-toggle="modal" disabled="disabled" data-target="#confirmModal">删除</button></p>');
 
             $("#expire-tag").html('<label class="checkbox-inline">' +
                 '<input name="periods" type="checkbox" value="1" checked>往期</label>' +
@@ -194,7 +216,16 @@ var vueObj = new Vue({
 
         },
         submit : function(){
-            alert(this.operType);
+            if(this.operType === 'add'){
+                
+            }else if(this.operType === 'edit'){
+
+            }else if(this.operType === 'remove'){
+
+            }else{
+                alert('operation not supported');
+            }
+
         }
     }
 });
