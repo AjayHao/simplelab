@@ -58,8 +58,8 @@ var vueObj = new Vue({
         dataTable : null,
         rowSel : null,
         appForm : {
-            productType : '',
-            productName : ''
+            projectType : '',
+            projectName : ''
         },
         sumCost : '',
         sumIncome : '',
@@ -149,8 +149,8 @@ var vueObj = new Vue({
                 var $rowObj = self.dataTable.rows( indexes ).data();
                 self.getRowSelObject($rowObj);
 
-                self.appForm.productType = self.rowSel.productType;
-                self.appForm.productName = self.rowSel.productName;
+                self.appForm.projectType = self.rowSel.projectType;
+                self.appForm.projectName = self.rowSel.projectName;
 
                 $("#btnEdit").removeAttr("disabled");
                 $("#btnRemove").removeAttr("disabled");

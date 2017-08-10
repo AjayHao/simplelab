@@ -5,7 +5,6 @@ import com.ajayhao.simplelab.dal.InvestDAO;
 import com.ajayhao.simplelab.dal.entity.InvestInfoDO;
 import com.ajayhao.simplelab.dal.mapper.InvestMapper;
 import com.ajayhao.simplelab.facade.enums.BizCode;
-import org.apache.commons.lang.exception.NestableException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

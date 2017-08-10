@@ -56,11 +56,11 @@
         </div>
         <!-- /.col-lg-12 -->
 
-        <div id="confirmModal" class="modal fade" tabindex="-1" role="dialog">
+        <div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">确认提交</h4>
+                        <h4 id="confirmModalLabel" class="modal-title">确认提交</h4>
                     </div>
                     <div class="modal-body">
                         <p>{{confirmMsg}}</p>
@@ -73,11 +73,11 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
-        <div id="formModal" class="modal fade" tabindex="-1" role="dialog">
+        <div id="formModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="formModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel">编辑记录</h4>
+                        <h4 class="modal-title" id="formModalLabel">编辑记录</h4>
                     </div>
                     <div class="modal-body">
                         <form :model="appForm">
@@ -87,7 +87,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="projectType" class="control-label">项目类型</label>
-                                <input type="text" class="form-control" id="projectName" v-model="appForm.projectType">
+                                <input type="text" class="form-control" id="projectType" v-model="appForm.projectType">
                             </div>
                         </form>
                     </div>
