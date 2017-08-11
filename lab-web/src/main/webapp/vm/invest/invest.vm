@@ -81,16 +81,43 @@
                         <h4 class="modal-title" id="formModalLabel">编辑记录</h4>
                     </div>
                     <div class="modal-body">
-                        <form :model="appForm">
+                        <form :model="appForm" class="form-horizontal">
                             <div class="form-group">
-                                <label for="projectName" class="control-label">项目名称</label>
-                                <input type="text" class="form-control" id="projectName" v-model="appForm.projectName">
+                                <label for="projectName" class="col-sm-2 control-label">项目名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="projectName" v-model="appForm.projectName">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="projectType" class="control-label">项目类型</label>
-                                #*url="${rc.contextPath}/dict?groupName=PROJECT_TYPE"*#
-                                #*<v-select :value.sync="select.value" :options="projectTypes" options-label="paramCode" options-value="paramValue" clear-button></v-select>*#
-                                <v-select :value.sync="prjectType" :options="select.options" options-value="val" multiple name="animals[]" limit="3" search justified required disabled clear-button close-on-select></v-select>
+                                <label for="projectType" class="col-sm-2 control-label">项目类型</label>
+                                <div class="col-sm-10">
+                                    <v-select id="projectType" v-model="appForm.projectType" :options="projectTypeDict"
+                                              lang="zh-CN" options-label="paramValue" options-value="paramCode" clear-button>
+                                    </v-select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="mainChannel" class="col-sm-2 control-label">主渠道</label>
+                                <div class="col-sm-10">
+                                    <v-select id="mainChannel" v-model="appForm.mainChannel" :options="mainChannelTypeDict"
+                                              lang="zh-CN" options-label="paramValue" options-value="paramCode" clear-button>
+                                    </v-select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subChannel" class="col-sm-2 control-label">子渠道</label>
+                                <div class="col-sm-10">
+                                    <v-select id="subChannel" v-model="appForm.subChannel" :options="subChannelTypeDict"
+                                              lang="zh-CN" options-label="paramValue" options-value="paramCode" clear-button>
+                                    </v-select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                #*<label for="beginDate" class="col-sm-2 control-label">起投日期</label>
+                                <div class="col-sm-10">
+                                    <datepicker v-model="appForm.beginDate" :disabled-days-of-Week="disabled" :format="yyyyMMdd"
+                                                :clear-button="clear"></datepicker>
+                                </div>*#
                             </div>
                         </form>
                     </div>

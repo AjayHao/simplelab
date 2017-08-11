@@ -30,8 +30,12 @@ $.extend( true, $.fn.dataTable.defaults, {
 
 var vueObj = new Vue({
     el: '#app',
+    components: {
+        vSelect: VueStrap.select,
+        vDatepicker : VueStrap.datepicker,
+    },
     data: {
-        COLUMN_META : [
+        gridColumns : [
             { "data": "id" },
             { "data": "projectName" },
             { "data": "projectType" },
@@ -58,39 +62,46 @@ var vueObj = new Vue({
         dataTable : null,
         rowSel : null,
         appForm : {
+            id : '',
             projectType : '',
-            projectName : ''
+            projectName : '',
+            mainChannel : '',
+            subChannel : '',
+            beginDate : '',
+            endDate : '',
+            cost : 0,
+            income : 0
         },
         sumCost : '',
         sumIncome : '',
         periods : ["1","2"],
         confirmMsg : '',
         operType : '',
-        /*projectTypes : [
-            {"paramCode" : "1","paramValue" : "哈哈"}
-        ]*/
-        projectType : '',
-        select : {
-            options: [
-                {val: 0, label: 'Cat'},
-                {val: 1, label: 'Cow'},
-                {val: 2, label: 'Dog'},
-                {val: 3, label: 'Elephant'},
-                {val: 4, label: 'Fish'},
-                {val: 5, label: 'Lion'},
-                {val: 6, label: 'Tiger'},
-                {val: 7, label: 'Turtle'}
-            ],
-            value : 1
-        }
+        projectTypeDict : [],
+        mainChannelTypeDict : [],
+        subChannelTypeDict : [],
     },
     created: function(){
-
+        this.initData();
     },
     mounted: function(){
         this.initRecordTable();
     },
     methods: {
+        initData: function(){
+            var dictUrl = basePath+"/dict";
+            var self = this;
+
+            $.getJSON( dictUrl , { "groupName" : 'PROJECT_TYPE' }, function (json) {
+                self.projectTypeDict = json;
+            });
+            $.getJSON( dictUrl , { "groupName" : 'MAIN_CHANNEL' }, function (json) {
+                self.mainChannelTypeDict = json;
+            });
+            $.getJSON( dictUrl , { "groupName" : 'SUB_CHANNEL' }, function (json) {
+                self.subChannelTypeDict = json;
+            });
+        },
         initRecordTable: function(){
             var self = this;
 
@@ -106,15 +117,15 @@ var vueObj = new Vue({
                     "url": self.getUrlParam(),
                     "dataSrc": "investDTOs"
                 },
-                "columns": self.COLUMN_META,
+                "columns": self.gridColumns,
                 "columnDefs": [
                     {
                         "render": function ( data, type, row ) {
                             return data +' ('+ row['subChannelDe']+')';
                         },
-                        "targets": 0
+                        "targets": [1]
                     },
-                    { "visible": false,  "targets": [0,2,3,4,5,6] }
+                    { "visible": false,  "targets": [0,2,4,5,6,7] }
                 ],
                 "footerCallback": function ( row, data, start, end, display ) {
                     var api = this.api();
@@ -171,8 +182,15 @@ var vueObj = new Vue({
                 var $rowObj = self.dataTable.rows( indexes ).data();
                 self.getRowSelObject($rowObj);
 
+                self.appForm.id = self.rowSel.id;
                 self.appForm.projectType = self.rowSel.projectType;
                 self.appForm.projectName = self.rowSel.projectName;
+                self.appForm.mainChannel = self.rowSel.mainChannel;
+                self.appForm.subChannel = self.rowSel.subChannel;
+                self.appForm.beginDate = self.rowSel.beginDate;
+                self.appForm.endDate = self.rowSel.endDate;
+                self.appForm.cost = self.rowSel.cost;
+                self.appForm.income = self.rowSel.income;
 
                 $("#btnEdit").removeAttr("disabled");
                 $("#btnRemove").removeAttr("disabled");
@@ -193,8 +211,8 @@ var vueObj = new Vue({
         },
         getRowSelObject : function(rowData) {
             var columnName;
-            for(col in this.COLUMN_META){
-                columnName = this.COLUMN_META[col].data;
+            for(col in this.gridColumns){
+                columnName = this.gridColumns[col].data;
                 this.rowSel = this.rowSel || {};
                 this.rowSel[columnName] = rowData.pluck(columnName)[0] || '';
             }

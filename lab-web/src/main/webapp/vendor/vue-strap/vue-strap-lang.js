@@ -83,7 +83,21 @@ ru: {
   notSelected: 'Ничего не выбрано',
   required: 'Обязательное поле',
   search: 'Поиск'
-}
+},
+
+zh: {
+  daysOfWeek: ['一', '二', '三', '四', '五', '六', '日'],
+  limit: 'Limit reached ({{limit}} items max).',
+  loading: '拼命加载中...',
+  minLength: '最小长度',
+  months: [
+    '一月', '二月', '三月', '四月', '五月', '六月',
+    '七月', '八月', '九月', '十月', '十一月', '十二月'
+  ],
+  notSelected: '请选择',
+  required: '必输项',
+  search: '查询'
+},
 
 };
 
@@ -97,6 +111,7 @@ var aliases = {
   en: /^en-[A-Z]{2}$/i,
   de: /^de-[A-Z]{2}$/i,
   ru: /^ru-[A-Z]{2}$/i,
+  zh: /^zh-[A-Z]{2}$/i
 };
 
 return function (lang) {

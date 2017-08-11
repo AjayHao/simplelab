@@ -72,8 +72,12 @@
 <!-- Vue JavaScript -->
 <script src="${rc.contextPath}/vendor/vue/vue.min.js"></script>
 
+<!-- Vue Resource -->
+<script src="${rc.contextPath}/vendor/vue-resource/vue-resource.min.js"></script>
+
 <!-- Vue Strap -->
 <script src="${rc.contextPath}/vendor/vue-strap/vue-strap.min.js"></script>
+<script src="${rc.contextPath}/vendor/vue-strap/vue-strap-lang.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="${rc.contextPath}/dist/js/site.js"></script>
