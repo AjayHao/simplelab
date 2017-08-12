@@ -28,11 +28,21 @@ $.extend( true, $.fn.dataTable.defaults, {
     },
 } );
 
+function showOperModal(flag){
+    vueObj.operType = flag;
+    if(flag != 'remove') {
+        $("#formModal").modal("show");
+    }else{
+        vueObj.submitConfirm();
+    }
+}
+
 var vueObj = new Vue({
     el: '#app',
     components: {
         vSelect: VueStrap.select,
         vDatepicker : VueStrap.datepicker,
+        vModal : VueStrap.modal,
     },
     data: {
         gridColumns : [
@@ -60,7 +70,7 @@ var vueObj = new Vue({
             }
         ],
         dataTable : null,
-        rowSel : null,
+        rowSel : {},
         appForm : {
             id : '',
             projectType : '',
@@ -80,6 +90,7 @@ var vueObj = new Vue({
         projectTypeDict : [],
         mainChannelTypeDict : [],
         subChannelTypeDict : [],
+        retMsg : '',
     },
     created: function(){
         this.initData();
@@ -158,11 +169,11 @@ var vueObj = new Vue({
             });
 
             $("#button-area").html('<p><button id="btnAdd" type="button" class="btn btn-primary "'+
-                                        'data-toggle="modal" data-target="#formModal">新增</button>'+
+                                        'onclick="showOperModal(\'add\')">新增</button>'+
                                         '<button id="btnEdit" type="button" class="btn btn-success" '+
-                                        'data-toggle="modal" disabled="disabled" data-target="#formModal">修改</button>'+
+                                        'disabled="disabled" onclick="showOperModal(\'edit\')">修改</button>'+
                                         '<button id="btnRemove" type="button" class="btn btn-danger" '+
-                                        'data-toggle="modal" disabled="disabled" data-target="#confirmModal">删除</button></p>');
+                                        'disabled="disabled" onclick="showOperModal(\'remove\')">删除</button></p>');
 
             $("#expire-tag").html('<label class="checkbox-inline">' +
                 '<input name="periods" type="checkbox" value="1" checked>往期</label>' +
@@ -181,26 +192,16 @@ var vueObj = new Vue({
             this.dataTable.on( 'select', function ( e, dt, type, indexes ) {
                 var $rowObj = self.dataTable.rows( indexes ).data();
                 self.getRowSelObject($rowObj);
-
-                self.appForm.id = self.rowSel.id;
-                self.appForm.projectType = self.rowSel.projectType;
-                self.appForm.projectName = self.rowSel.projectName;
-                self.appForm.mainChannel = self.rowSel.mainChannel;
-                self.appForm.subChannel = self.rowSel.subChannel;
-                self.appForm.beginDate = self.rowSel.beginDate;
-                self.appForm.endDate = self.rowSel.endDate;
-                self.appForm.cost = self.rowSel.cost;
-                self.appForm.income = self.rowSel.income;
-
+                self.refreshModalData();
                 $("#btnEdit").removeAttr("disabled");
                 $("#btnRemove").removeAttr("disabled");
             }).on('deselect', function () {
-                self.rowSel = null;
+                //self.rowSel = null;
+                //self.refreshModalData();
                 $("#btnEdit").attr("disabled","disabled");
                 $("#btnRemove").attr("disabled","disabled");
             });
 
-            this.bindBtnEvents();
         },
         getUrlParam : function () {
             var paramArr = this.periods.reduce(function (a, b) {
@@ -217,33 +218,93 @@ var vueObj = new Vue({
                 this.rowSel[columnName] = rowData.pluck(columnName)[0] || '';
             }
         },
-        bindBtnEvents : function() {
-            var self = this;
-            $("#btnAdd").on('click',function(){
-                self.operType = 'add';
-                self.confirmMsg = '是否确认提交';
-            });
-            $("#btnEdit").on('click',function(){
-                self.operType = 'edit';
-                self.confirmMsg = '是否确认提交';
-            });
-            $("#btnRemove").on('click',function(){
-                self.operType = 'remove';
-                self.confirmMsg = '是否确认删除该条记录';
-            });
+        refreshModalData : function(){
 
+            this.appForm.id = this.rowSel.id || '';
+            this.appForm.projectType = this.rowSel.projectType || '';
+            this.appForm.projectName = this.rowSel.projectName || '';
+            this.appForm.mainChannel = this.rowSel.mainChannel || '';
+            this.appForm.subChannel = this.rowSel.subChannel || '';
+            this.appForm.beginDate = this.rowSel.beginDate || '';
+            this.appForm.endDate = this.rowSel.endDate || '';
+            this.appForm.cost =  this.rowSel.cost || '';
+            this.appForm.income =  this.rowSel.income || '';
+        },
+        submitConfirm : function() {
+            if (this.operType === 'add') {
+                this.confirmMsg = '是否新增该条记录';
+            } else if (this.operType === 'edit') {
+                this.confirmMsg = '是否修改该条记录';
+            } else if (this.operType === 'remove') {
+                this.confirmMsg = '是否删除该条记录';
+            } else {
+                alert('operation not supported');
+            }
+            $("#confirmModal").modal('show');
         },
         submit : function(){
+            var self = this;
+            var id = this.appForm.id;
+
             if(this.operType === 'add'){
-                
+                var paramStr = JSON.stringify(formatValues(this.appForm)); //透传
+                this.$http.post(basePath+'/invest/',  paramStr).then(
+                    function (response) {
+                        if(response &&  response.body && response.body.respCode){
+                            self.showRetModal(response.body.respCode, response.body.respMsg);
+                        }else{
+                            self.showRetModal('-1','返回异常，response:'+ JSON.parse(response));
+                        }
+                    },
+                    function (response) {
+                        self.showRetModal('-1','请求失败:'+response.statusText);
+                        console.info(response.body);
+                    });
             }else if(this.operType === 'edit'){
-
+                var paramStr = JSON.stringify(formatValues(this.appForm)); //透传
+                this.$http.put(basePath+'/invest/'+ id,  paramStr).then(
+                    function (response) {
+                        if(response &&  response.body && response.body.respCode){
+                            self.showRetModal(response.body.respCode, response.body.respMsg);
+                        }else{
+                            self.showRetModal('-1','返回异常，response:'+ JSON.parse(response));
+                        }
+                    },
+                    function (response) {
+                        self.showRetModal('-1','请求失败:'+response.statusText);
+                        console.info(response.body);
+                    });
             }else if(this.operType === 'remove'){
-
+                this.$http.delete(basePath+'/invest/'+ id).then(
+                    function (response) {
+                        if(response &&  response.body && response.body.respCode){
+                            self.showRetModal(response.body.respCode, response.body.respMsg);
+                        }else{
+                            self.showRetModal('-1','返回异常，response:'+ JSON.parse(response));
+                        }
+                    },
+                    function (response) {
+                        self.showRetModal('-1','请求失败:'+response.statusText);
+                        console.info(response.body);
+                    });
             }else{
                 alert('operation not supported');
             }
 
+        },
+        showRetModal : function(retcode, msg){
+            this.retMsg = msg;
+            $("#confirmModal").modal('hide');
+            $("#resultModal").modal('show');
+            if(retcode == '0'){
+                $("#formModal").modal('hide');
+                this.rowSel = {};  //操作成功后清除选中项
+            }
+        },
+        hideRetModal : function () {
+            $("#resultModal").modal('hide');
+            this.refreshModalData();
+            this.dataTable.ajax.url(this.getUrlParam()).load();
         }
     }
 });

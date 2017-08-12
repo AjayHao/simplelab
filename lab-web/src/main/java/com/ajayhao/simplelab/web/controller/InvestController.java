@@ -5,12 +5,16 @@ import com.ajayhao.simplelab.facade.dto.InvestInfoDTO;
 import com.ajayhao.simplelab.facade.dto.response.InvestResponse;
 import com.ajayhao.simplelab.facade.enums.BizCode;
 import com.ajayhao.simplelab.service.InvestService;
+import com.ajayhao.simplelab.util.ObjectUtils;
+import com.ajayhao.simplelab.util.SystemUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by AjayHao on 2017/7/13.
@@ -48,7 +52,50 @@ public class InvestController {
     @RequestMapping(path = "/{id}", method = {RequestMethod.DELETE})
     public InvestResponse deleteInvestInfoByIdPath(@PathVariable String id) {
         InvestResponse response = new InvestResponse();
+        if (isIdValid(id, response)) return response;
         investService.removeInvestInfo(id);
+        return response;
+    }
+
+    @RequestMapping(path = "/{id}", method = {RequestMethod.PUT})
+    public InvestResponse modifyInvestInfo(@PathVariable String id, @RequestBody String params) {
+        InvestResponse response = new InvestResponse();
+        if (isIdValid(id, response)) return response;
+        if (isParamObjValid(params, response)) return response;
+        InvestInfoDTO investInfoDTO;
+        try{
+            investInfoDTO = ObjectUtils.fromJson(params,InvestInfoDTO.class);
+            investInfoDTO.setId(id);
+        }catch(Exception e){
+            logger.warn(BizCode.INVALID_PARAM.getMessage(), e);
+            response.setRespCode(BizCode.INVALID_PARAM.getCode());
+            response.setRespMsg("传入的对象无法转换：params="+params);
+            return response;
+        }
+
+        investService.modifyInvestInfo(investInfoDTO);
+
+        return response;
+    }
+
+    @RequestMapping(path = "/", method = {RequestMethod.POST})
+    public InvestResponse insertInvestInfo(@RequestBody String params) {
+        InvestResponse response = new InvestResponse();
+        //if (isIdValid(id, response)) return response;
+        if (isParamObjValid(params, response)) return response;
+        InvestInfoDTO investInfoDTO;
+        try{
+            investInfoDTO = ObjectUtils.fromJson(params,InvestInfoDTO.class);
+            investInfoDTO.setId(SystemUtils.objectId());
+        }catch(Exception e){
+            logger.warn(BizCode.INVALID_PARAM.getMessage(), e);
+            response.setRespCode(BizCode.INVALID_PARAM.getCode());
+            response.setRespMsg("传入的对象无法转换：params="+params);
+            return response;
+        }
+
+        investService.modifyInvestInfo(investInfoDTO);
+
         return response;
     }
 
@@ -67,4 +114,23 @@ public class InvestController {
         return response;
     }
 
+    private boolean isIdValid(@PathVariable String id, InvestResponse response) {
+        if(StringUtils.isBlank(id)){
+            logger.warn(BizCode.INVALID_PARAM.getMessage());
+            response.setRespCode(BizCode.INVALID_PARAM.getCode());
+            response.setRespMsg("传入的待修改对象id为空");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isParamObjValid(@RequestBody String params, InvestResponse response) {
+        if(StringUtils.isBlank(params)){
+            logger.warn(BizCode.INVALID_PARAM.getMessage());
+            response.setRespCode(BizCode.INVALID_PARAM.getCode());
+            response.setRespMsg("传入的待修改对象参数为空");
+            return true;
+        }
+        return false;
+    }
 }

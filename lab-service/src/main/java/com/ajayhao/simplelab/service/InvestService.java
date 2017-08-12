@@ -30,4 +30,9 @@ public interface InvestService {
     * 删除投资信息
     * */
     void removeInvestInfo(String id);
+
+    /*
+    * 修改投资信息
+    * */
+    void modifyInvestInfo(InvestInfoDTO investInfoDTO);
 }

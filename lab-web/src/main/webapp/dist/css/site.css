@@ -10,3 +10,17 @@
 table.dataTable tbody tr.selected, table.dataTable.display tbody tr.selected {
     background-color: #a9b7d1;
 }*/
+.form-horizontal .form-group .col-sm-1,
+.form-horizontal .form-group .col-sm-2,
+.form-horizontal .form-group .col-sm-3,
+.form-horizontal .form-group .col-sm-4,
+.form-horizontal .form-group .col-sm-5,
+.form-horizontal .form-group .col-sm-6,
+.form-horizontal .form-group .col-sm-7,
+.form-horizontal .form-group .col-sm-8,
+.form-horizontal .form-group .col-sm-9,
+.form-horizontal .form-group .col-sm-10,
+.form-horizontal .form-group .col-sm-11{
+    padding-left: 0px;
+    padding-right: 30px;
+}

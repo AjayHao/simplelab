@@ -53,3 +53,13 @@ function toNumber(i) {
         typeof i === 'number' ?
             i : 0;
 };
+
+function formatValues(obj){
+    var thisObj = obj;
+    if(thisObj && typeof thisObj === 'object'){
+        for(attr in thisObj){
+            thisObj[attr] = thisObj[attr] || null;
+        }
+    }
+    return thisObj;
+}

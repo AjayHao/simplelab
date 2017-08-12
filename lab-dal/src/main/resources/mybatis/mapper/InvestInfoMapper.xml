@@ -115,6 +115,24 @@
         </trim>
     </insert>
 
+    <update id="updateInvestInfo">
+        update invest_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="projectName!=null">project_name=#{projectName},</if>
+            <if test="projectType!=null">project_type=#{projectType},</if>
+            <if test="mainChannel!=null">main_channel=#{mainChannel},</if>
+            <if test="subChannel!=null">sub_channel=#{subChannel},</if>
+            <if test="cost!=null">cost=#{cost},</if>
+            <if test="income!=null">income=#{income},</if>
+            <if test="beginDate!=null">begin_date=#{beginDate},</if>
+            <if test="endDate!=null">end_date=#{endDate},</if>
+            <if test="creatorId!=null">creator_id=#{creatorId},</if>
+            <if test="modifierId!=null">modifier_id=#{modifierId},</if>
+            modify_tm = now()
+        </trim>
+        WHERE id=#{id}
+    </update>
+
     <delete id="deleteInvestInfo">
         delete from invest_info
          where id = #{id}

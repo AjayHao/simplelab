@@ -4,6 +4,7 @@ import com.ajayhao.simplelab.base.exception.BaseException;
 import com.ajayhao.simplelab.dal.InvestDAO;
 import com.ajayhao.simplelab.dal.entity.InvestInfoDO;
 import com.ajayhao.simplelab.dal.mapper.InvestMapper;
+import com.ajayhao.simplelab.facade.dto.InvestInfoDTO;
 import com.ajayhao.simplelab.facade.enums.BizCode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class InvestDAOImpl implements InvestDAO{
     @Override
     public int deleteInvestInfo(String id) {
         return investMapper.deleteInvestInfo(id);
+    }
+
+    @Override
+    public int modifyInvestInfo(InvestInfoDO investInfoDO) {
+        return investMapper.updateInvestInfo(investInfoDO);
     }
 
 }

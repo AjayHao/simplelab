@@ -103,7 +103,6 @@ public class InvestServiceImpl implements InvestService {
         return investInfoDTO;
     }
 
-
     /*
     * 计算年化收益率
     * */
@@ -123,8 +122,8 @@ public class InvestServiceImpl implements InvestService {
             return null;
 
         BigDecimal daysInterval =
-                new BigDecimal(DateUtils.days(DateUtils.parseToDate(beginDate, "yyyyMMdd"),
-                                    DateUtils.parseToDate(endDate, "yyyyMMdd"))+1);
+                new BigDecimal(DateUtils.days(DateUtils.parseToDate(beginDate, "yyyy-MM-dd"),
+                                    DateUtils.parseToDate(endDate, "yyyy-MM-dd"))+1);
 
         BigDecimal b = income.divide(cost, 8, RoundingMode.HALF_DOWN);
         b = b.multiply(DAYS_OF_YEAR).multiply(ONE_HUNDRED).divide(daysInterval, 2 , BigDecimal.ROUND_HALF_DOWN);
@@ -139,14 +138,24 @@ public class InvestServiceImpl implements InvestService {
         investDAO.deleteInvestInfo(id);
     }
 
+    /*
+    * 修改投资信息
+    * */
+    @Override
+    public void modifyInvestInfo(InvestInfoDTO investInfoDTO) {
+        InvestInfoDO investInfoDO = new InvestInfoDO();
+        fromOutCopier.copy(investInfoDTO,investInfoDO, null);
+        investDAO.modifyInvestInfo(investInfoDO);
+    }
+
 
     private String judgeExpiration(InvestInfoDO investInfo) {
         String endDate = investInfo.getEndDate();
-        if(org.apache.commons.lang3.StringUtils.isEmpty(endDate)){
+        if(StringUtils.isEmpty(endDate)){
             return "2";
         }else{
             Date now = new Date();
-            if(DateUtils.days(now, DateUtils.yyyymmdd(endDate)) > 0){
+            if(DateUtils.days(now, DateUtils.parseToDate(endDate,"yyyy-MM-dd")) > 0){
                 return "2";
             }else{
                 return "1";
