@@ -46,6 +46,9 @@
     <insert id="insertInvestInfo">
         insert into invest_info
         <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
             <if test="projectName != null" >
                 project_name,
             </if>
@@ -80,6 +83,9 @@
                 modify_tm,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
             <if test="projectName != null" >
                 #{projectName,jdbcType=VARCHAR},
             </if>
