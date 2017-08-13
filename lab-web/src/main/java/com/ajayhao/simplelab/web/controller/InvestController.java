@@ -53,7 +53,12 @@ public class InvestController {
     public InvestResponse deleteInvestInfoByIdPath(@PathVariable String id) {
         InvestResponse response = new InvestResponse();
         if (isIdValid(id, response)) return response;
-        investService.removeInvestInfo(id);
+        try {
+            investService.removeInvestInfo(id);
+        }catch (Exception e){
+            response.setRespCode(BizCode.FAIL.getCode());
+            response.setRespMsg("Exception :" + e + " params="+id);
+        }
         return response;
     }
 
@@ -66,14 +71,11 @@ public class InvestController {
         try{
             investInfoDTO = ObjectUtils.fromJson(params,InvestInfoDTO.class);
             investInfoDTO.setId(id);
+            investService.modifyInvestInfo(investInfoDTO);
         }catch(Exception e){
-            logger.warn(BizCode.INVALID_PARAM.getMessage(), e);
-            response.setRespCode(BizCode.INVALID_PARAM.getCode());
-            response.setRespMsg("传入的对象无法转换：params="+params);
-            return response;
+            response.setRespCode(BizCode.SYS_ERROR.getCode());
+            response.setRespMsg("Exception :" + e + " params="+params);
         }
-
-        investService.modifyInvestInfo(investInfoDTO);
 
         return response;
     }
@@ -87,14 +89,11 @@ public class InvestController {
         try{
             investInfoDTO = ObjectUtils.fromJson(params,InvestInfoDTO.class);
             investInfoDTO.setId(SystemUtils.objectId());
+            investService.addInvestInfo(investInfoDTO);
         }catch(Exception e){
-            logger.warn(BizCode.INVALID_PARAM.getMessage(), e);
-            response.setRespCode(BizCode.INVALID_PARAM.getCode());
-            response.setRespMsg("传入的对象无法转换：params="+params);
-            return response;
+            response.setRespCode(BizCode.SYS_ERROR.getCode());
+            response.setRespMsg("Exception :" + e + " params="+params);
         }
-
-        investService.modifyInvestInfo(investInfoDTO);
 
         return response;
     }
