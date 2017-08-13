@@ -84,7 +84,7 @@ var vueObj = new Vue({
         },
         sumCost : '',
         sumIncome : '',
-        periods : ["1","2"],
+        periods : ['2'],
         confirmMsg : '',
         operType : '',
         projectTypeDict : [],
@@ -175,10 +175,11 @@ var vueObj = new Vue({
                                         '<button id="btnRemove" type="button" class="btn btn-danger" '+
                                         'disabled="disabled" onclick="showOperModal(\'remove\')">删除</button></p>');
 
-            $("#expire-tag").html('<label class="checkbox-inline">' +
-                '<input name="periods" type="checkbox" value="1" checked>往期</label>' +
+            $("#expire-tag").html(
                 '<label class="checkbox-inline">' +
-                '<input name="periods" type="checkbox" value="2" checked>当期</label>');
+                '<input name="periods" type="checkbox" value="2" checked>当期</label>' +
+                '<label class="checkbox-inline">' +
+                '<input name="periods" type="checkbox" value="1">往期</label>');
 
             $("input[name='periods']").change(function () {
                     self.periods = [];
