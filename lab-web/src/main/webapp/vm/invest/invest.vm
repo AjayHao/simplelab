@@ -92,7 +92,7 @@
                             <label for="subChannel" class="col-sm-3 control-label">子渠道</label>
                             <div class="col-sm-6">
                                 <v-select id="subChannel" v-model="appForm.subChannel" :options="subChannelTypeDict"
-                                          lang="zh-CN" options-label="paramValue" options-value="paramCode" clear-button>
+                                          lang="zh-CN" options-label="paramValue" options-value="paramCode"  clear-button>
                                 </v-select>
                             </div>
                         </div>
@@ -126,7 +126,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-##                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">提交</button>
                     <button type="button" class="btn btn-primary" @click="submitConfirm">提交</button>
                 </div>
             </div><!-- /.modal-content -->
