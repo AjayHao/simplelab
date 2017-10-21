@@ -19,3 +19,4 @@ INSERT INTO `common_params` VALUES ('6', 'PROJECT_TYPE', 'PT006', '组合基金'
 INSERT INTO `common_params` VALUES ('7', 'PROJECT_TYPE', 'PT007', '混合基金', '项目类型-混合基金', 'sys', '2017-8-8 00:25:50', 'sys', '2017-8-8 00:25:50');
 INSERT INTO `common_params` VALUES ('8', 'PROJECT_TYPE', 'PT008', '分级基金', '项目类型-分级基金', 'sys', '2017-8-8 00:25:50', 'sys', '2017-8-8 00:25:50');
 INSERT INTO `common_params` VALUES ('9', 'MAIN_CHANNEL', 'MC001', '银行', '购买渠道-银行', 'sys', '2017-8-8 00:25:50', 'sys', '2017-8-8 00:25:50');
+INSERT INTO `common_params` (`id`, `param_group`, `param_code`, `param_value`, `param_desc`, `creator_id`, `create_tm`, `modifier_id`, `modify_tm`) VALUES ('22', 'SUB_CHANNEL', 'HJ005', '中投在线', '子渠道-中投在线', 'sys', '2017-08-08 00:25:51', 'sys', '2017-08-08 00:25:51');
