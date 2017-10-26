@@ -1,3 +1,4 @@
+delete from common_params;
 INSERT INTO `common_params` VALUES ('1', 'PROJECT_TYPE', 'PT001', '活期理财', '项目类型-活期理财', 'sys', '2017-8-8 00:25:50', 'sys', '2017-8-8 00:25:50');
 INSERT INTO `common_params` VALUES ('10', 'MAIN_CHANNEL', 'MC002', '券商', '购买渠道-券商', 'sys', '2017-8-8 00:25:50', 'sys', '2017-8-8 00:25:50');
 INSERT INTO `common_params` VALUES ('11', 'MAIN_CHANNEL', 'MC003', '基金', '购买渠道-基金', 'sys', '2017-8-8 00:25:51', 'sys', '2017-8-8 00:25:51');
