@@ -8,13 +8,15 @@ import java.util.UUID;
 /**
  * Created by Administrator on 2016/5/29 0029.
  */
-public class BaseResponse extends BaseDTO implements Serializable {
+public class BaseResponse<T> extends BaseDTO implements Serializable {
 
     private static final long serialVersionUID = 6784377605497392229L;
 
     private String respCode;
 
     private String respMsg;
+
+    private T result;
 
     private String respId = UUID.randomUUID().toString().replace("-", "");
 
@@ -58,4 +60,11 @@ public class BaseResponse extends BaseDTO implements Serializable {
         return respId;
     }
 
+    public T getResult() {
+        return result;
+    }
+
+    public void setResult(T result) {
+        this.result = result;
+    }
 }
